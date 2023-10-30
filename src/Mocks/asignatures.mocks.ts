@@ -8,7 +8,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 0,
+        day: 1,
         isCheck: false  
     },
     {
@@ -18,7 +18,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 0,
+        day: 1,
         isCheck: false 
     },
     {
@@ -28,7 +28,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 0,
+        day: 1,
         isCheck: false 
     },
     {
@@ -38,7 +38,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 0,
+        day: 1,
         isCheck: false 
     },
     {
@@ -48,7 +48,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 0,
+        day: 1,
         isCheck: false 
     },
     {
@@ -58,17 +58,7 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 1,
-        isCheck: false  
-    },
-    {
-        title: "Tarea Mock",
-        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.    ",
-        hour: 13,
-        minutes: 30,
-        isDone: false,
-        isExpire: false,
-        day: 1,
+        day: 2,
         isCheck: false  
     },
     {
@@ -88,8 +78,38 @@ export const asignatures_mock: IAsignature[] = [
         minutes: 30,
         isDone: false,
         isExpire: false,
-        day: 5,
+        day: 2,
         isCheck: false  
+    },
+    {
+        title: "Tarea Mock",
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.    ",
+        hour: 13,
+        minutes: 30,
+        isDone: false,
+        isExpire: false,
+        day: 6,
+        isCheck: false  
+    },
+    {
+        title: "Tarea Mock",
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.    ",
+        hour: 13,
+        minutes: 30,
+        isDone: false,
+        isExpire: false,
+        day: 6,
+        isCheck: true  
+    },
+    {
+        title: "Tarea Mock",
+        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.    ",
+        hour: 13,
+        minutes: 30,
+        isDone: false,
+        isExpire: false,
+        day: 6,
+        isCheck: true  
     },
 
     

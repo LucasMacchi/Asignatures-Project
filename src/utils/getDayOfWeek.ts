@@ -1,5 +1,7 @@
 import { Tdays } from "../interfaces/interfaces"
-export default function GetDayofWeek(day: Tdays): string{
+export default function GetDayofWeek(day: Tdays, lang: string | undefined): string{
+
+    
     switch(day){
         case 0: return 'Lunes'
         case 1: return 'Martes'

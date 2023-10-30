@@ -1,7 +1,8 @@
 import React, {useReducer, createContext} from "react";
-import { IGlobalState, IPropsChildren,IAction } from "../../interfaces/interfaces";
+import { IGlobalState, IPropsChildren,IAction, Ilabels } from "../../interfaces/interfaces";
 import { GlobalContext } from "../Contexts";
 import types from "../Types";
+import changeTranslation from "../../utils/changeTranslation";
 
 //Reducer//------------------------------------------
 const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
@@ -10,7 +11,8 @@ const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
         case types.CHANGE_LANGUAGE:
             return{
                 ...state,
-                language: payload
+                language: payload,
+                translation: changeTranslation(payload)
             }
         case types.CHANGE_TYPE: 
             return{
@@ -23,6 +25,9 @@ const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
 }
 
 //------------------------------------------
+
+//------------------------------------------
+
 
 export default function GlobalState(props: IPropsChildren){
     //actions//--------------
@@ -43,6 +48,7 @@ export default function GlobalState(props: IPropsChildren){
     const initialState: IGlobalState = {
         language: 'en',
         type: 'week',
+        translation: changeTranslation('en'),
         changeLanguage,
         changeType
     }

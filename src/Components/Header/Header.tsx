@@ -15,9 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import LanguageIcon from '@mui/icons-material/Language';
 import Typography from "@mui/material";
 
-//flags
-import Flag_US from 'country-flag-icons/react/3x2/US'
-
 function Header(){
 
     
@@ -49,8 +46,8 @@ function Header(){
                 </div>
                 
                 <Tabs value={tabPos} centered textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
-                    <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label="Your Week!" value={0}/>
-                    <Tab icon={<CheckBoxIcon/>} iconPosition="start" label="Your Asignatures!" value={1}/>
+                    <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label={global?.translation.types[0]} value={0}/>
+                    <Tab icon={<CheckBoxIcon/>} iconPosition="start" label={global?.translation.types[1]} value={1}/>
                 </Tabs>
                 <div id="Login-button">
                     <LanguageIcon fontSize="large"/>

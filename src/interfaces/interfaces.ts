@@ -10,6 +10,7 @@ export type Tminutes = 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20
 export interface IGlobalState {
     language: 'en' | 'spa',
     type: 'week' | "check",
+    translation: Ilabels,
     changeLanguage: (payload: string) => void;
     changeType: (payload: string) => void;
 }
@@ -33,4 +34,8 @@ export interface IAsignature{
     isExpire: boolean,
     day: Tdays,
     isCheck: boolean
+}
+export interface Ilabels{
+    days: string[],
+    types: string[]
 }
