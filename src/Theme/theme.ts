@@ -13,7 +13,8 @@ const theme = createTheme({
             paper: grey[900]
         },
         text:{
-            primary: grey[50]
+            primary: grey[50],
+            
         }
     }
 })

@@ -15,7 +15,10 @@ export interface IGlobalState {
     changeType: (payload: string) => void;
 }
 export interface IAsigantureState{
-    asignatures: IAsignature[]
+    asignatures: IAsignature[] | null,
+    getAllTasks: () => void;
+    taskDone: (id: number) => void;
+    taskDelete: (id: number) => void;
 }
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]
@@ -33,7 +36,8 @@ export interface IAsignature{
     isDone: boolean,
     isExpire: boolean,
     day: Tdays,
-    isCheck: boolean
+    isCheck: boolean,
+    id: number
 }
 export interface Ilabels{
     days: string[],

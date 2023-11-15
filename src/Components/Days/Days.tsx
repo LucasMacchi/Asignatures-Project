@@ -1,5 +1,5 @@
 import "./Days.css"
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { AsignaturesContext, GlobalContext } from "../../Context/Contexts"
 import { Tabs, Tab, Box } from "@mui/material"
 import Asignature from "../Asignature/Asignature"
@@ -13,8 +13,12 @@ export default function Days(){
 
     const changedTab = (e:any, value: number) => setDay(value)
     const currentDay = new Date().getDay()
-    console.log(currentDay)
     const [day, setDay] = useState(currentDay)
+
+    //Loader
+    useEffect(() => {
+        if(!asignatures?.asignatures) asignatures?.getAllTasks()
+    },[])
 
     const day_activities = (day: number) => {
         if(asignatures?.asignatures){

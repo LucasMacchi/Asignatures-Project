@@ -11,7 +11,7 @@ export default function ToDoList(){
             return(
                 <div id="daysAsig">
                     {asignatures.asignatures.map(asg => {
-                        if(asg.isCheck) return( <Asignature {...asg}/>)
+                        if(asg.isCheck && !asg.isDone) return( <Asignature {...asg}/>)
                     })}
                 </div>
             )

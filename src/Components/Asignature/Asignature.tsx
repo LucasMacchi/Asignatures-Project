@@ -1,6 +1,6 @@
 import './Asignature.css'
 import { IAsignature } from '../../interfaces/interfaces'
-import { GlobalContext } from '../../Context/Contexts'
+import { GlobalContext, AsignaturesContext } from '../../Context/Contexts'
 import { useState, useContext } from 'react'
 import hoursParser from '../../utils/hourParser'
 import GetDayofWeek from '../../utils/getDayOfWeek'
@@ -13,6 +13,7 @@ export default function Asignature(prop: IAsignature){
 
     //context
     const global = useContext(GlobalContext)
+    const asignatureContext = useContext(AsignaturesContext)
 
     const asignature = prop
     const hour = hoursParser(asignature.hour,asignature.minutes).getHours()
@@ -20,9 +21,29 @@ export default function Asignature(prop: IAsignature){
 
     const [status, setStatus] = useState("")
 
+    //functions
+    const renderBtns = () => {
+        if(!prop.isDone){
+            return(
+                <CardActions>
+                <IconButton color='error'>
+                    <DeleteForeverOutlinedIcon/>
+                </IconButton>
+                <IconButton color='error'>
+                    <CancelOutlinedIcon/>
+                </IconButton>
+                <IconButton color='success' onClick={doneBtn}>
+                    <CheckCircleOutlineOutlinedIcon/>
+                </IconButton>
+            </CardActions> 
+            )
+        }
+    }
+
     //Buttons
     const doneBtn = () => {
-
+        asignatureContext?.taskDone(prop.id)
+        if(prop.isCheck) asignatureContext?.taskDelete(prop.id)
     }
     const deleteBtn = () => {
 
@@ -38,18 +59,9 @@ export default function Asignature(prop: IAsignature){
                 {asignature.isCheck ? status : <Typography variant='subtitle1' gutterBottom>{global?.translation.days[asignature.day]} - {hour}:{minute}</Typography>}
                 <Typography variant='h5' >{asignature.title}</Typography>
                 <Typography variant='body1'>{asignature.description}</Typography>
+                {prop.isDone && <CheckCircleOutlineOutlinedIcon color='success' fontSize='large'/>}
             </CardContent>
-            <CardActions>
-                <IconButton color='error'>
-                    <DeleteForeverOutlinedIcon/>
-                </IconButton>
-                <IconButton color='error'>
-                    <CancelOutlinedIcon/>
-                </IconButton>
-                <IconButton color='success'>
-                    <CheckCircleOutlineOutlinedIcon/>
-                </IconButton>
-            </CardActions>
+            {renderBtns()}
         </Card>
         </div>
 
