@@ -19,6 +19,8 @@ export interface IAsigantureState{
     getAllTasks: () => void;
     taskDone: (id: number) => void;
     taskDelete: (id: number) => void;
+    taskUndone: (id: number) => void;
+    
 }
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]

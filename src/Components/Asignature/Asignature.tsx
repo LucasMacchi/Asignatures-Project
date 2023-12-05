@@ -1,7 +1,7 @@
 import './Asignature.css'
 import { IAsignature } from '../../interfaces/interfaces'
 import { GlobalContext, AsignaturesContext } from '../../Context/Contexts'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import hoursParser from '../../utils/hourParser'
 import GetDayofWeek from '../../utils/getDayOfWeek'
 import {Card, CardContent, Typography, CardActions, IconButton} from '@mui/material'
@@ -21,16 +21,17 @@ export default function Asignature(prop: IAsignature){
 
     const [status, setStatus] = useState("")
 
+    useEffect(() => {
+        asignatureContext?.taskUndone(asignature.id)
+    },[])
+
     //functions
     const renderBtns = () => {
         if(!prop.isDone){
             return(
                 <CardActions>
-                <IconButton color='error'>
+                <IconButton color='error' onClick={deleteBtn}>
                     <DeleteForeverOutlinedIcon/>
-                </IconButton>
-                <IconButton color='error'>
-                    <CancelOutlinedIcon/>
                 </IconButton>
                 <IconButton color='success' onClick={doneBtn}>
                     <CheckCircleOutlineOutlinedIcon/>
@@ -46,10 +47,7 @@ export default function Asignature(prop: IAsignature){
         if(prop.isCheck) asignatureContext?.taskDelete(prop.id)
     }
     const deleteBtn = () => {
-
-    }
-    const expireBtn = () => {
-
+        asignatureContext?.taskDelete(prop.id)
     }
     
     return(

@@ -5,4 +5,12 @@ html, body {
 }
 body{
   background: rgba(115,23,23,1);
+  height: 100%;
+}
+#addBtn{
+  display: flex;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  margin: 50px;
 }
