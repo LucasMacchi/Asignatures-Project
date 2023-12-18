@@ -2,11 +2,13 @@ import { Ilabels } from "../interfaces/interfaces"
 //Translation//------------------------------------------
 const spanish: Ilabels = {
     days:["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
-    types: ["Tu Semana!", "Lista para Hacer!"]
+    types: ["Tu Semana!", "Lista para Hacer!"],
+    labels: ["Titulo", "Descripcion", "Horario", "Crear Tarea"]
 }
 const english: Ilabels = {
     days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    types: ["Your Week!", "To Do List!"]
+    types: ["Your Week!", "To Do List!"],
+    labels: ["Title", "Description", "Time", "Create Task"]
 
 }
 

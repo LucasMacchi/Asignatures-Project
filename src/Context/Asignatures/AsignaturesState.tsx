@@ -1,5 +1,5 @@
 import React, {useReducer} from "react";
-import { IAsigantureState, IPropsChildren,IAction } from "../../interfaces/interfaces";
+import { IAsigantureState, IPropsChildren,IAction, IAsignature_add } from "../../interfaces/interfaces";
 import { AsignaturesContext } from "../Contexts";
 import t from "../Types";
 import axios from "axios";
@@ -34,6 +34,7 @@ const asignatureRed = (state: IAsigantureState, action: IAction) : IAsigantureSt
             })
             if(undoneStates) return {...state, asignatures: undoneStates}
             else return state
+
         default:
             return state
     }
@@ -93,6 +94,14 @@ export default function AsignaturesState(props: IPropsChildren){
             console.log("ERROR: ",error)
         }
     }
+    const taskAdd = async (task: IAsignature_add) => {
+        try {
+            await axios.post('http://localhost:3400/task/add', task)
+        } catch (error) {
+            console.log("ERROR: ",error)
+        }
+
+    }
 
     //--------------
 
@@ -101,7 +110,8 @@ export default function AsignaturesState(props: IPropsChildren){
         getAllTasks,
         taskDone,
         taskDelete,
-        taskUndone
+        taskUndone,
+        taskAdd
     }
     const [state, dispatch] = useReducer(asignatureRed,initialState)
 

@@ -8,11 +8,29 @@ import AsignaturesState from './Context/Asignatures/AsignaturesState';
 import ToDoList from './Components/TodoList/ToDoList';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
+import AddTask from './Components/AddTask/AddTask';
+import Alert from '@mui/material/Alert';
+
 
 function App() {
 
   const global = useContext(GlobalContext)
-  
+
+  const handleAdd = () => {
+    global?.changeDialogAddTask(true)
+  }
+
+  useEffect(() => {
+
+  },[global?.alert])
+
+  const displayAlert = () => {
+    setTimeout(() => {
+      global?.changeAlert({status: false, text: "", type: "success"})
+    }, 4000);
+    return(<Alert variant="filled" severity={global?.alertType}>{global?.alertText}</Alert>)
+  }
+
 
   return (
       <div className="bigDiv" >
@@ -22,10 +40,14 @@ function App() {
             {global?.type === 'week' && <Days/>}
             {global?.type === 'check' && <ToDoList/>}
             <div id='addBtn'>
-              <Fab color="primary" aria-label="add">
+              <Fab color="primary" aria-label="add" onClick={handleAdd}>
                 <AddIcon />
               </Fab>
             </div>
+            <div id='alert'>
+              {global?.alert && displayAlert()}
+            </div>
+            {global?.changeDialogAddTask && <AddTask/>}
           </AsignaturesState>
         </div>
       </div>

@@ -14,3 +14,11 @@ body{
   position: fixed;
   margin: 50px;
 }
+#alert{
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+  position: fixed;
+  margin-bottom: 50px;
+  width: 50%;
+}

@@ -1,5 +1,5 @@
 import React, {useReducer, createContext} from "react";
-import { IGlobalState, IPropsChildren,IAction, Ilabels } from "../../interfaces/interfaces";
+import { IGlobalState, IPropsChildren,IAction, Ilabels, IAlert } from "../../interfaces/interfaces";
 import { GlobalContext } from "../Contexts";
 import types from "../Types";
 import changeTranslation from "../../utils/changeTranslation";
@@ -18,6 +18,23 @@ const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
             return{
                 ...state,
                 type: payload
+            }
+        case types.CHANGE_DIALOG_ADD_TASK: 
+            return{
+                ...state,
+                addTaskDialog: payload
+            }
+        case types.CHANGE_DIALOG_LOGIN: 
+            return{
+                ...state,
+                loginDialog: payload
+            }
+        case types.CHANGE_ALERT:
+            return{
+                ...state,
+                alert: payload.status,
+                alertText: payload.text,
+                alertType: payload.type
             }
         default:
             return state
@@ -44,13 +61,39 @@ export default function GlobalState(props: IPropsChildren){
         })
 
     }
+    const changeDialogLogin = (payload: boolean) => {
+        dispatch({
+            type: types.CHANGE_DIALOG_LOGIN,
+            payload: payload
+        })
+    }
+    const changeDialogAddTask = (payload: boolean) => {
+        dispatch({
+            type: types.CHANGE_DIALOG_ADD_TASK,
+            payload: payload
+        })
+    }
+    const changeAlert = (payload: IAlert) => {
+        dispatch({
+            type: types.CHANGE_ALERT,
+            payload: payload
+        })
+    }
     //--------------
     const initialState: IGlobalState = {
         language: 'en',
         type: 'week',
+        loginDialog: false,
+        addTaskDialog: false,
+        alert: false,
+        alertText: "",
+        alertType: "success",
         translation: changeTranslation('en'),
         changeLanguage,
-        changeType
+        changeType,
+        changeDialogLogin,
+        changeDialogAddTask,
+        changeAlert
     }
     const [state, dispatch] = useReducer(globalRed,initialState)
     
