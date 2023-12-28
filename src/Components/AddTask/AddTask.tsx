@@ -35,27 +35,40 @@ export default function AddTask () {
     })
 
     useEffect(() => {
-        
-        if(task.day && task.minutes && task.title && task.hour && task.description) setBtn(false)
+        emptyState()
+    },[global?.changeDialogAddTask])
+
+
+    useEffect(() => {
+        if(task.day && task.title && task.hour && task.description) setBtn(false)
         else{setBtn(true)}
     },[task])
 
     const handleClose = () => {
+        emptyState()
         global?.changeDialogAddTask(false)
+    }
+
+    const emptyState = () => {
+        task.description = ""
+        task.title = ""
     }
 
     const createTask = () => {
         if(!btn){
             console.log("TASK CREATED",task)
             asignatureCont?.taskAdd(task)
-            global?.changeAlert({status: true, text: "NUEVA TAREA A SIDO CREADA", type: "success"})
-            global?.changeDialogAddTask(false)
+            global?.changeAlert({status: true, text: global?.translation.alerts[0], type: "success"})
+            global?.changeDialogAddTask(false)  
+            emptyState()
         }
+
     }
 
     const onChange = (prop: string, payload: string | number) => {
         setTask({
             ...task,
+            isCheck: global?.type === "check" ? true : false,
             [prop]: payload
         })
     }
@@ -73,9 +86,9 @@ export default function AddTask () {
                     <Box sx={{display: "flex"}}>
                         <Box>
                             <Typography variant="h5" color="secondary">{global?.translation.labels[0]}</Typography>
-                            <TextField id='title' onChange={(e) => onChange("title",e.target.value)}>{task.title}</TextField>
+                            <TextField id='title' onChange={(e) => onChange("title",e.target.value)} value={task.title}></TextField>
                         </Box>
-                        <Box marginLeft={5}>
+                        <Box marginLeft={5} display={global?.type === "check" ? "none" : "block"}>
                             <Typography variant="h5" color="secondary">{global?.translation.labels[2]}</Typography>
                             <TextField id='hour' onChange={(e) => onChange("hour",e.target.value)} value={task.hour} select>
                                 {hours.map((option) => (
@@ -94,7 +107,7 @@ export default function AddTask () {
                         </Box>
                     </Box>
                     <Typography variant="h5" color="secondary">{global?.translation.labels[1]}</Typography>
-                    <TextField id='body' onChange={(e) => onChange("description",e.target.value)} multiline fullWidth rows={5}> {task.description} </TextField>
+                    <TextField id='body' onChange={(e) => onChange("description",e.target.value)} value={task.description} multiline fullWidth rows={5}>  </TextField>
                     <Box sx={{display: "flex", justifyContent: "flex-end", marginTop: 2}}>
                         <Button variant="contained" onClick={createTask} disabled={btn} color='secondary'>{global?.translation.labels[3]}</Button>
                     </Box>
