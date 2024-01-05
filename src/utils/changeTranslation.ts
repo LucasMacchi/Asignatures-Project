@@ -3,13 +3,15 @@ import { Ilabels } from "../interfaces/interfaces"
 const spanish: Ilabels = {
     days:["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
     types: ["Tu Semana!", "Lista para Hacer!"],
-    labels: ["Titulo", "Descripcion", "Horario", "Crear Tarea"],
-    alerts: ["NUEVA TAREA A SIDO CREADA"]
+    labels: ["Titulo", "Descripcion", "Horario", "Crear Tarea", "Email", 
+    "Contraseña", "INGRESAR", "REGISTRARSE", "Ingrese un email valido"],
+    alerts: ["NUEVA TAREA A SIDO CREADA", "Correo o Contraseña no valido", "Ingrese una contraseña valida"]
 }
 const english: Ilabels = {
     days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     types: ["Your Week!", "To Do List!"],
-    labels: ["Title", "Description", "Time", "Create Task"],
+    labels: ["Title", "Description", "Time", "Create Task", "Email", 
+    "Password", "LOGIN", "SIGN UP", "Type a valid email", "Wrong Email or Password", "Type a valid password"],
     alerts: ["NEW TASK CREATED"]
 
 }

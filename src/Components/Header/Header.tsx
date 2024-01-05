@@ -37,6 +37,10 @@ function Header(){
         global?.changeLanguage(event.target.value)
     }
 
+    const loginBtn = () => {
+        global?.changeDialogLogin(true)
+    }
+
     return(
         <AppBar position="static">
             <div id="navBar-Tab">
@@ -57,7 +61,7 @@ function Header(){
                                 <MenuItem value={'spa'}>SPA</MenuItem>
                             </Select>
                         </FormControl>
-                    <Button variant="outlined" color="secondary" size="large">Login</Button>
+                    <Button variant="outlined" color="secondary" size="large" onClick={loginBtn}>Login</Button>
                 </div>
             </div>
 
