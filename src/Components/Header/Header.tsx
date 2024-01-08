@@ -1,9 +1,9 @@
 import "./Header.css"
 import { useState, useContext, useEffect } from "react";
-import { GlobalContext } from "../../Context/Contexts";
+import { GlobalContext, UserContext } from "../../Context/Contexts";
 
 //Material import
-import { AppBar, Menu } from "@mui/material";
+import { AppBar, Box, Menu } from "@mui/material";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Button from "@mui/material/Button";
@@ -13,6 +13,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import LanguageIcon from '@mui/icons-material/Language';
+import LogoutIcon from '@mui/icons-material/Logout';
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material";
 
 function Header(){
@@ -20,7 +22,7 @@ function Header(){
     
     //context
     const global = useContext(GlobalContext)
-    
+    const userCon = useContext(UserContext)
     //states
     const[tabPos, setTabPos] = useState(0);
     
@@ -39,6 +41,22 @@ function Header(){
 
     const loginBtn = () => {
         global?.changeDialogLogin(true)
+    }
+
+    const loginDisplay = () => {
+        if(userCon?.isLogged){
+            return(
+                <IconButton color="secondary" aria-label="logout">
+                    Lucas 
+                    <LogoutIcon sx={{marginLeft: 2}}/>
+                </IconButton>
+            )
+        }
+        else{
+            return(
+                <Button variant="outlined" color="secondary" size="large" onClick={loginBtn}>Login</Button>
+            )
+        }
     }
 
     return(
@@ -61,7 +79,7 @@ function Header(){
                                 <MenuItem value={'spa'}>SPA</MenuItem>
                             </Select>
                         </FormControl>
-                    <Button variant="outlined" color="secondary" size="large" onClick={loginBtn}>Login</Button>
+                    {loginDisplay()}
                 </div>
             </div>
 

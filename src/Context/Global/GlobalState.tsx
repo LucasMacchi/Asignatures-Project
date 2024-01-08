@@ -29,6 +29,11 @@ const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
                 ...state,
                 loginDialog: payload
             }
+        case types.CHANGE_DIALOG_REGISTER: 
+            return{
+                ...state,
+                registerDialog: payload
+            }
         case types.CHANGE_ALERT:
             return{
                 ...state,
@@ -73,6 +78,12 @@ export default function GlobalState(props: IPropsChildren){
             payload: payload
         })
     }
+    const changeDialogRegister = (payload: boolean) => {
+        dispatch({
+            type: types.CHANGE_DIALOG_REGISTER,
+            payload: payload
+        })
+    }
     const changeAlert = (payload: IAlert) => {
         dispatch({
             type: types.CHANGE_ALERT,
@@ -85,6 +96,7 @@ export default function GlobalState(props: IPropsChildren){
         type: 'week',
         loginDialog: false,
         addTaskDialog: false,
+        registerDialog: false,
         alert: false,
         alertText: "",
         alertType: "success",
@@ -93,6 +105,7 @@ export default function GlobalState(props: IPropsChildren){
         changeType,
         changeDialogLogin,
         changeDialogAddTask,
+        changeDialogRegister,
         changeAlert
     }
     const [state, dispatch] = useReducer(globalRed,initialState)

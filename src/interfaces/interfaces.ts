@@ -12,6 +12,7 @@ export interface IGlobalState {
     type: 'week' | "check",
     loginDialog: boolean,
     addTaskDialog: boolean,
+    registerDialog: boolean,
     alert: boolean,
     alertText: string,
     alertType: "error" | "warning" | "success" 
@@ -20,6 +21,7 @@ export interface IGlobalState {
     changeType: (payload: string) => void;
     changeDialogLogin: (payload: boolean) => void;
     changeDialogAddTask: (payload: boolean) => void;
+    changeDialogRegister: (payload: boolean) => void;
     changeAlert: (payload: IAlert) => void;
 
 }
@@ -38,6 +40,7 @@ export interface IUserState {
     isLogged: boolean,
     login: (email: string, password: string) => Promise<boolean>;
     register: () => void;
+    logout: () => void;
 }
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]

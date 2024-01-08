@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import AddTask from './Components/AddTask/AddTask';
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 import Alert from '@mui/material/Alert';
 
 
@@ -37,8 +38,8 @@ function App() {
   return (
       <div className="bigDiv" >
         <div className="App">
+        <UserState>
           <Header/>
-          <UserState>
           <AsignaturesState>
             {global?.type === 'week' && <Days/>}
             {global?.type === 'check' && <ToDoList/>}
@@ -52,8 +53,9 @@ function App() {
             </div>
             {global?.changeDialogAddTask && <AddTask/>}
             {global?.changeDialogLogin && <Login/>}
+            {global?.changeDialogRegister && <Register/>}
           </AsignaturesState>
-          </UserState>
+        </UserState>
         </div>
       </div>
 

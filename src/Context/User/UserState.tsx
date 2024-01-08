@@ -6,7 +6,13 @@ import axios from "axios";
 
 //Reducer//------------------------------------------
 const userReducer = (state: IUserState, action: IAction): IUserState => {
-    return state
+    const {payload, type} = action
+    switch(type){
+        case types.USER_LOG: 
+            return state
+        default:
+            return state
+    }
 }
 
 //------------------------------------------
@@ -27,13 +33,15 @@ export default function UserState(props: IPropsChildren) {
         }
     }
     const register = async () => {}
+    const logout = async () => {}
 
     //--------------
     const initialState: IUserState = {
         user: {email: "", username: ""},
         isLogged: false,
         login,
-        register
+        register,
+        logout
     }
 
     const [state, dispatch] = useReducer(userReducer,initialState)

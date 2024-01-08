@@ -17,9 +17,6 @@ import HowToRegIcon from '@mui/icons-material/HowToReg';
 
 export default function Login () {
 
-
-    
-
     const global = useContext(GlobalContext)
     const userCon = useContext(UserContext)
     const [formsError, setError] = useState({
@@ -64,6 +61,11 @@ export default function Login () {
         setUserLogin({email: "", password: ""})
     }
 
+    const registerBtn = () => {
+        global?.changeDialogLogin(false)
+        global?.changeDialogRegister(true)
+    }
+
     return(
         <Backdrop open={global ? global.loginDialog : false}>
             <Paper>
@@ -81,7 +83,7 @@ export default function Login () {
                         <TextField type="password" error={formsError.passwordError} helperText={formsError.passwordMsg} fullWidth id="password" size="small" variant="filled" label={global?.translation.labels[5]} color="secondary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
                     </Box>
                     <Box sx={{marginTop: 1.5, display: "flex", justifyContent: "space-between"}}>
-                        <Button size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.labels[7]} </Button>
+                        <Button onClick={registerBtn} size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.labels[7]} </Button>
                         <Button disabled={formsError.emailError} size="small" variant="outlined" color="secondary" startIcon={<LoginIcon/>} onClick={logButton}> {global?.translation.labels[6]} </Button>
                     </Box>
                 </Box>
