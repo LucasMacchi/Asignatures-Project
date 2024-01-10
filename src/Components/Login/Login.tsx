@@ -38,8 +38,6 @@ export default function Login () {
         if(userLogin.email === "") setError({...formsError, emailError: true, emailMsg: global?.translation.labels[8] || "error"})
         else if(!emailRegex.test(userLogin.email)) setError({...formsError, emailError: true, emailMsg: global?.translation.labels[8] || "error"})
         else setError({...formsError, emailError: false, emailMsg: ""})
-
-
     }
     const errorHandlerPassword = () => {
         if(userLogin.password === "") setError({...formsError, passwordError: true, passwordMsg: global?.translation.labels[10] || "error"})

@@ -88,6 +88,14 @@ export interface IUserLogin{
     password: string
 }
 
+export interface IUserRegister{
+    email: string,
+    password: string,
+    passwordCon: string,
+    user: string,
+    adult: boolean
+}
+
 export interface IUser {
     username: string,
     email: string

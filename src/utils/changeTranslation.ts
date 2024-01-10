@@ -4,14 +4,19 @@ const spanish: Ilabels = {
     days:["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"],
     types: ["Tu Semana!", "Lista para Hacer!"],
     labels: ["Titulo", "Descripcion", "Horario", "Crear Tarea", "Email", 
-    "Contraseña", "INGRESAR", "REGISTRARSE", "Ingrese un email valido"],
+    "Contraseña", "INGRESAR", "REGISTRARSE", 
+    "Ingrese un email valido", "Confirmar Contraseña", "Nombre de Usuario",
+    "Las contraseñas no coinciden", "Ingresa un usuario valido", "Eres mayor de edad?*"],
     alerts: ["NUEVA TAREA A SIDO CREADA", "Correo o Contraseña no valido", "Ingrese una contraseña valida"]
 }
 const english: Ilabels = {
     days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
     types: ["Your Week!", "To Do List!"],
     labels: ["Title", "Description", "Time", "Create Task", "Email", 
-    "Password", "LOGIN", "SIGN UP", "Type a valid email", "Wrong Email or Password", "Type a valid password"],
+    "Password", "LOGIN", "SIGN UP", "Type a valid email", 
+    "Wrong Email or Password", "Type a valid password",
+     "Confirm Password", "Username", "Password confimation does not match",
+    "Type a valid username", "Are you at least 18 years old?*"],
     alerts: ["NEW TASK CREATED"]
 
 }
