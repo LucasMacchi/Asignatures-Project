@@ -15,7 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import LanguageIcon from '@mui/icons-material/Language';
 import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material";
+import Typography from "@mui/material/Typography";
+import EventNoteIcon from '@mui/icons-material/EventNote';
 
 function Header(){
 
@@ -62,11 +63,10 @@ function Header(){
     return(
         <AppBar position="static">
             <div id="navBar-Tab">
-                <div>
-                    <h3>Logo here</h3>
-                    
-                </div>
-                
+                <Box sx={{display: "flex", alignItems: "center"}}>
+                    <EventNoteIcon fontSize="large"/>
+                    <Typography variant="h6">Your Schedule</Typography>
+                </Box>
                 <Tabs value={tabPos} centered textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
                     <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label={global?.translation.types[0]} value={0}/>
                     <Tab icon={<CheckBoxIcon/>} iconPosition="start" label={global?.translation.types[1]} value={1}/>

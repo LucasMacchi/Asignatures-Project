@@ -32,7 +32,18 @@ export default function UserState(props: IPropsChildren) {
             return false
         }
     }
-    const register = async () => {}
+    const register = async (email: string, username: string, password: string): Promise<Boolean> => {
+        try {
+            console.log("aca3")
+            const userToRegister = {email, username, password}
+            const registerRoute: boolean = await (await axios.post('http://localhost:3400/user/register', userToRegister)).data
+            console.log("REGISTER = ",registerRoute)
+            return registerRoute
+        } catch (error) {
+            console.log("ERROR: ",error)
+            return false
+        }
+    }
     const logout = async () => {}
 
     //--------------

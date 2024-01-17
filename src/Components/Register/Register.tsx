@@ -51,6 +51,7 @@ export default function Register () {
     }
 
     const handleClose = () => {
+        emptyState()
         global?.changeDialogRegister(false)
     }
 
@@ -84,8 +85,30 @@ export default function Register () {
         handleUser("adult", event.target.checked)
     }
 
-    const register = () => {
-        
+    const emptyState = () => {
+        setUserRegister({
+            email: "",
+            user: "",
+            password: "",
+            passwordCon: "",
+            adult: false
+        })
+    }
+
+    const register = async () => {
+        const user = userRegister
+        console.log("aca ",user)
+        const validation = await userCon?.register(user.email, user.user, user.password)
+        console.log("aca2 ",validation)
+        if(!validation) {
+            emptyState()
+            global?.changeAlert({status: true, text: global.translation.alerts[1], type: "error"})
+        }
+        else{
+            global?.changeAlert({status: true, text: global.translation.alerts[2], type: "success"})
+            emptyState()
+            global?.changeDialogRegister(false)
+        }
     }
 
     return(
@@ -115,7 +138,7 @@ export default function Register () {
                         <Checkbox checked={userRegister.adult} color="secondary" onChange={(e) => checked(e)} />
                     </Box>
                     <Box sx={{marginTop: 1.5, display: "flex", justifyContent: "flex-end"}}>
-                        <Button  disabled={formsError.adultError || formsError.emailError || formsError.passwordConError || formsError.passwordError || formsError.userError || !userRegister.adult} size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.labels[7]} </Button>
+                        <Button onClick={register} disabled={formsError.adultError || formsError.emailError || formsError.passwordConError || formsError.passwordError || formsError.userError || !userRegister.adult} size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.labels[7]} </Button>
                     </Box>
                 </Box>
             </Paper>

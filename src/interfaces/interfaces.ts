@@ -39,7 +39,7 @@ export interface IUserState {
     user: IUser,
     isLogged: boolean,
     login: (email: string, password: string) => Promise<boolean>;
-    register: () => void;
+    register: (email: string, username: string, password: string) => Promise<Boolean>;
     logout: () => void;
 }
 export interface IPropsChildren {

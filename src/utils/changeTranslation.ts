@@ -7,7 +7,7 @@ const spanish: Ilabels = {
     "Contraseña", "INGRESAR", "REGISTRARSE", 
     "Ingrese un email valido", "Confirmar Contraseña", "Nombre de Usuario",
     "Las contraseñas no coinciden", "Ingresa un usuario valido", "Eres mayor de edad?*"],
-    alerts: ["NUEVA TAREA A SIDO CREADA", "Correo o Contraseña no valido", "Ingrese una contraseña valida"]
+    alerts: ["NUEVA TAREA A SIDO CREADA", "ERROR AL CREAR USUARIO", "NUEVO USUARIO RESGISTRADO"]
 }
 const english: Ilabels = {
     days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -17,7 +17,7 @@ const english: Ilabels = {
     "Wrong Email or Password", "Type a valid password",
      "Confirm Password", "Username", "Password confimation does not match",
     "Type a valid username", "Are you at least 18 years old?*"],
-    alerts: ["NEW TASK CREATED"]
+    alerts: ["NEW TASK CREATED", "ERROR TO CREATE NEW USER", "NEW USER CREATED"]
 
 }
 

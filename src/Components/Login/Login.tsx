@@ -61,6 +61,7 @@ export default function Login () {
 
     const registerBtn = () => {
         global?.changeDialogLogin(false)
+        setUserLogin({email: "", password: ""})
         global?.changeDialogRegister(true)
     }
 
