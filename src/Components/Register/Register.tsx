@@ -63,6 +63,7 @@ export default function Register () {
 
     const errorHandlerPassword = () => {
         if(userRegister.password === "") setError({...formsError, passwordError: true, passwordMsg: global?.translation.labels[10] || "error"})
+        else if(userRegister.password.length < 8) setError({...formsError, passwordError: true, passwordMsg: global?.translation.labels[16] || "error"})
         else setError({...formsError, passwordError: false, passwordMsg: ""})
     }
 
@@ -96,11 +97,10 @@ export default function Register () {
     }
 
     const register = async () => {
+        
         const user = userRegister
-        console.log("aca ",user)
         const validation = await userCon?.register(user.email, user.user, user.password)
-        console.log("aca2 ",validation)
-        if(!validation) {
+        if(validation === false || validation === undefined) {
             emptyState()
             global?.changeAlert({status: true, text: global.translation.alerts[1], type: "error"})
         }

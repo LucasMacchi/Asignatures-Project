@@ -6,7 +6,8 @@ const spanish: Ilabels = {
     labels: ["Titulo", "Descripcion", "Horario", "Crear Tarea", "Email", 
     "Contraseña", "INGRESAR", "REGISTRARSE", 
     "Ingrese un email valido", "Confirmar Contraseña", "Nombre de Usuario",
-    "Las contraseñas no coinciden", "Ingresa un usuario valido", "Eres mayor de edad?*"],
+    "Las contraseñas no coinciden", "Ingresa un usuario valido", "Eres mayor de edad?*",
+    "Tu contraseña debe tener al menos 8 caracteres"],
     alerts: ["NUEVA TAREA A SIDO CREADA", "ERROR AL CREAR USUARIO", "NUEVO USUARIO RESGISTRADO"]
 }
 const english: Ilabels = {
@@ -16,8 +17,8 @@ const english: Ilabels = {
     "Password", "LOGIN", "SIGN UP", "Type a valid email", 
     "Wrong Email or Password", "Type a valid password",
      "Confirm Password", "Username", "Password confimation does not match",
-    "Type a valid username", "Are you at least 18 years old?*"],
-    alerts: ["NEW TASK CREATED", "ERROR TO CREATE NEW USER", "NEW USER CREATED"]
+    "Type a valid username", "Are you at least 18 years old?*", "You password need to have at least 8 characters"],
+    alerts: ["NEW TASK CREATED", "ERROR TO CREATE NEW USER, TRY OTHER EMAIL", "NEW USER CREATED"]
 
 }
 
