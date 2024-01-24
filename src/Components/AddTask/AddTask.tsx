@@ -58,7 +58,7 @@ export default function AddTask () {
         if(!btn){
             console.log("TASK CREATED",task)
             asignatureCont?.taskAdd(task)
-            global?.changeAlert({status: true, text: global?.translation.alerts[0], type: "success"})
+            global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})
             global?.changeDialogAddTask(false)  
             emptyState()
         }
@@ -85,11 +85,11 @@ export default function AddTask () {
                     </Box>
                     <Box sx={{display: "flex"}}>
                         <Box>
-                            <Typography variant="h5" color="secondary">{global?.translation.labels[0]}</Typography>
+                            <Typography variant="h5" color="secondary">{global?.translation.task.title}</Typography>
                             <TextField id='title' onChange={(e) => onChange("title",e.target.value)} value={task.title}></TextField>
                         </Box>
                         <Box marginLeft={5} display={global?.type === "check" ? "none" : "block"}>
-                            <Typography variant="h5" color="secondary">{global?.translation.labels[2]}</Typography>
+                            <Typography variant="h5" color="secondary">{global?.translation.task.time}</Typography>
                             <TextField id='hour' onChange={(e) => onChange("hour",e.target.value)} value={task.hour} select>
                                 {hours.map((option) => (
                                     <MenuItem key={option} value={option}>
@@ -106,10 +106,10 @@ export default function AddTask () {
                             </TextField>
                         </Box>
                     </Box>
-                    <Typography variant="h5" color="secondary">{global?.translation.labels[1]}</Typography>
+                    <Typography variant="h5" color="secondary">{global?.translation.task.description}</Typography>
                     <TextField id='body' onChange={(e) => onChange("description",e.target.value)} value={task.description} multiline fullWidth rows={5}>  </TextField>
                     <Box sx={{display: "flex", justifyContent: "flex-end", marginTop: 2}}>
-                        <Button variant="contained" onClick={createTask} disabled={btn} color='secondary'>{global?.translation.labels[3]}</Button>
+                        <Button variant="contained" onClick={createTask} disabled={btn} color='secondary'>{global?.translation.task.create_task}</Button>
                     </Box>
                 </Box>
             </Paper>

@@ -35,12 +35,12 @@ export default function Login () {
     }
 
     const errorHandlerEmail = () => {
-        if(userLogin.email === "") setError({...formsError, emailError: true, emailMsg: global?.translation.labels[8] || "error"})
-        else if(!emailRegex.test(userLogin.email)) setError({...formsError, emailError: true, emailMsg: global?.translation.labels[8] || "error"})
+        if(userLogin.email === "") setError({...formsError, emailError: true, emailMsg: global?.translation.errors.email_valid || "error"})
+        else if(!emailRegex.test(userLogin.email)) setError({...formsError, emailError: true, emailMsg: global?.translation.errors.email_valid || "error"})
         else setError({...formsError, emailError: false, emailMsg: ""})
     }
     const errorHandlerPassword = () => {
-        if(userLogin.password === "") setError({...formsError, passwordError: true, passwordMsg: global?.translation.labels[10] || "error"})
+        if(userLogin.password === "") setError({...formsError, passwordError: true, passwordMsg: global?.translation.errors.password_valid || "error"})
         else setError({...formsError, passwordError: false, passwordMsg: ""})
     }
     useEffect(errorHandlerEmail,[userLogin.email])
@@ -55,7 +55,12 @@ export default function Login () {
 
     const logButton = async () => {
         const validation = await userCon?.login(userLogin.email, userLogin.password)
-        if(!validation) setError({...formsError, passwordError: true, passwordMsg: global?.translation.labels[9] || "error"})
+        if(!validation) global?.changeAlert({status: true, text: global.translation.alerts.login_error, type: "error"})
+        else {
+            global?.changeDialogLogin(false)
+            global?.changeAlert({status: true, text: global.translation.alerts.login_success, type: "success"})
+            /* MAYBE RELOAD PAGE ? */
+        }
         setUserLogin({email: "", password: ""})
     }
 
@@ -76,23 +81,17 @@ export default function Login () {
                         </IconButton>
                     </Box>
                     <Box>
-                        <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={global?.translation.labels[4]} color="secondary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>
+                        <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={global?.translation.login.email} color="secondary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>
                     </Box>
                     <Box sx={{marginTop: 2}}>
-                        <TextField type="password" error={formsError.passwordError} helperText={formsError.passwordMsg} fullWidth id="password" size="small" variant="filled" label={global?.translation.labels[5]} color="secondary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
+                        <TextField type="password" error={formsError.passwordError} helperText={formsError.passwordMsg} fullWidth id="password" size="small" variant="filled" label={global?.translation.login.password} color="secondary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
                     </Box>
                     <Box sx={{marginTop: 1.5, display: "flex", justifyContent: "space-between"}}>
-                        <Button onClick={registerBtn} size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.labels[7]} </Button>
-                        <Button disabled={formsError.emailError} size="small" variant="outlined" color="secondary" startIcon={<LoginIcon/>} onClick={logButton}> {global?.translation.labels[6]} </Button>
+                        <Button onClick={registerBtn} size="small" variant="outlined" color="secondary" startIcon={<HowToRegIcon/>}> {global?.translation.login.sign_up_btn} </Button>
+                        <Button disabled={formsError.emailError} size="small" variant="outlined" color="secondary" startIcon={<LoginIcon/>} onClick={logButton}> {global?.translation.login.log_btn} </Button>
                     </Box>
                 </Box>
             </Paper>
         </Backdrop>
     )
 }
-
-/*
-                        <Typography variant="h5" color="secondary">
-                            {global?.translation.labels[4]}
-                        </Typography>
-*/

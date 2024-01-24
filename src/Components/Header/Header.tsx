@@ -17,10 +17,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 function Header(){
 
-    
     //context
     const global = useContext(GlobalContext)
     const userCon = useContext(UserContext)
@@ -44,13 +44,22 @@ function Header(){
         global?.changeDialogLogin(true)
     }
 
+    const userData = () => {
+
+    }
+
     const loginDisplay = () => {
         if(userCon?.isLogged){
             return(
-                <IconButton color="secondary" aria-label="logout">
-                    Lucas 
-                    <LogoutIcon sx={{marginLeft: 2}}/>
-                </IconButton>
+                <Box display={"flex"} alignItems={"center"}>
+                    <IconButton color="secondary" aria-label="account">
+                        <AccountBoxIcon sx={{marginLeft: 2}}/>
+                    </IconButton>
+                    <IconButton color="secondary" aria-label="logout">
+                        <LogoutIcon sx={{marginLeft: 2}}/>
+                    </IconButton>
+                </Box>
+
             )
         }
         else{
@@ -68,8 +77,8 @@ function Header(){
                     <Typography variant="h6">Your Schedule</Typography>
                 </Box>
                 <Tabs value={tabPos} centered textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
-                    <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label={global?.translation.types[0]} value={0}/>
-                    <Tab icon={<CheckBoxIcon/>} iconPosition="start" label={global?.translation.types[1]} value={1}/>
+                    <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label={global?.translation.types.week} value={0}/>
+                    <Tab icon={<CheckBoxIcon/>} iconPosition="start" label={global?.translation.types.todo} value={1}/>
                 </Tabs>
                 <div id="Login-button">
                     <LanguageIcon fontSize="large"/>

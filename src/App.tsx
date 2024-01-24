@@ -13,6 +13,7 @@ import AddTask from './Components/AddTask/AddTask';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
 import Alert from '@mui/material/Alert';
+import UserData from './Components/Header/userData';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
             {global?.changeDialogAddTask && <AddTask/>}
             {global?.changeDialogLogin && <Login/>}
             {global?.changeDialogRegister && <Register/>}
+            <UserData/>
           </AsignaturesState>
         </UserState>
         </div>

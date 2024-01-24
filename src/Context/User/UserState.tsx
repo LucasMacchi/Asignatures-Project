@@ -1,5 +1,5 @@
 import React, {useReducer, createContext} from "react";
-import { IUserState, IAction, IPropsChildren } from "../../interfaces/interfaces";
+import { IUserState, IAction, IPropsChildren, IUser } from "../../interfaces/interfaces";
 import { UserContext } from "../Contexts";
 import types from "../Types";
 import axios from "axios";
@@ -9,7 +9,7 @@ const userReducer = (state: IUserState, action: IAction): IUserState => {
     const {payload, type} = action
     switch(type){
         case types.USER_LOG: 
-            return state
+            return {...state,isLogged: payload.log, user:{email: payload.email, username: payload.username, createdAt: payload.createdAt}}
         default:
             return state
     }
@@ -24,14 +24,24 @@ export default function UserState(props: IPropsChildren) {
     const login = async (email: string, password: string): Promise<boolean> => {
         try {
             const userToLog = {email,password}
-            const access: boolean = await (await axios.post('http://localhost:3400/user/login', userToLog)).data
+            const access: IUser = await (await axios.post('http://localhost:3400/user/login', userToLog)).data
             console.log("USER ACCESS = ",access)
-            return access
+            if(access && access.email && access.username){
+                dispatch({
+                    type: types.USER_LOG,
+                    payload: {email: access.email, username: access.username, createdAt: access.createdAt, log: true}
+                })
+                return true
+            }
+            else{
+                return false
+            }
         } catch (error) {
             console.log("ERROR: ",error)
             return false
         }
     }
+
     const register = async (email: string, username: string, password: string): Promise<Boolean> => {
         try {
             console.log("aca3")
@@ -48,7 +58,7 @@ export default function UserState(props: IPropsChildren) {
 
     //--------------
     const initialState: IUserState = {
-        user: {email: "", username: ""},
+        user: {email: "", username: "", createdAt: new Date},
         isLogged: false,
         login,
         register,

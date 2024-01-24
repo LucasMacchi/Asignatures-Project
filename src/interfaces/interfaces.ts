@@ -16,7 +16,7 @@ export interface IGlobalState {
     alert: boolean,
     alertText: string,
     alertType: "error" | "warning" | "success" 
-    translation: Ilabels,
+    translation: Ilanguages,
     changeLanguage: (payload: string) => void;
     changeType: (payload: string) => void;
     changeDialogLogin: (payload: boolean) => void;
@@ -71,11 +71,58 @@ export interface IAsignature_add{
     day: number,
     isCheck: boolean,
 }
-export interface Ilabels{
-    days: string[],
-    types: string[],
-    labels: string[],
-    alerts: string[]
+export interface Ilanguages {
+    days: {
+        0: string,
+        1: string,
+        2: string,
+        3: string,
+        4: string,
+        5: string,
+        6: string,
+    },
+    types:{
+        week: string,
+        todo: string
+    },
+    errors: {
+        password_min: string,
+        password_match: string,
+        user_valid: string,
+        email_valid: string,
+        password_valid: string
+    },
+    login: {
+        email: string,
+        password: string,
+        log_btn: string,
+        sign_up_btn: string
+    },
+    register: {
+        title: string,
+        email: string,
+        password: string,
+        username: string,
+        password_con: string,
+        adult: string,
+        register_btn: string
+    },
+    user_info: {
+        user_information: string
+    },
+    alerts: {
+        new_task: string,
+        error_user_register: string,
+        new_user_register: string,
+        login_success: string,
+        login_error: string
+    },
+    task:{
+        title: string,
+        description: string,
+        time: string,
+        create_task: string
+    }
 }
 export interface IAlert{
     status: boolean,
@@ -98,7 +145,8 @@ export interface IUserRegister{
 
 export interface IUser {
     username: string,
-    email: string
+    email: string,
+    createdAt: Date
 }
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

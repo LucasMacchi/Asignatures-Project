@@ -1,5 +1,5 @@
 import React, {useReducer, createContext} from "react";
-import { IGlobalState, IPropsChildren,IAction, Ilabels, IAlert } from "../../interfaces/interfaces";
+import { IGlobalState, IPropsChildren,IAction, IAlert } from "../../interfaces/interfaces";
 import { GlobalContext } from "../Contexts";
 import types from "../Types";
 import changeTranslation from "../../utils/changeTranslation";
