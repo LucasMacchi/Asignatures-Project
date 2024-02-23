@@ -1,6 +1,6 @@
 import './Asignature.css'
 import { IAsignature } from '../../interfaces/interfaces'
-import { GlobalContext, AsignaturesContext } from '../../Context/Contexts'
+import { GlobalContext, AsignaturesContext, UserContext } from '../../Context/Contexts'
 import { useState, useContext, useEffect } from 'react'
 import hoursParser from '../../utils/hourParser'
 import GetDayofWeek from '../../utils/getDayOfWeek'
@@ -14,6 +14,7 @@ export default function Asignature(prop: IAsignature){
     //context
     const global = useContext(GlobalContext)
     const asignatureContext = useContext(AsignaturesContext)
+    const userCon = useContext(UserContext)
 
     const asignature = prop
     const hour = hoursParser(asignature.hour,asignature.minutes).getHours()
@@ -22,7 +23,8 @@ export default function Asignature(prop: IAsignature){
     const [status, setStatus] = useState("")
 
     useEffect(() => {
-        asignatureContext?.taskUndone(asignature.id)
+        if(userCon?.isLogged) asignatureContext?.taskUndone(asignature.id, userCon.user.user_id)
+        
     },[])
 
     //functions
@@ -43,11 +45,14 @@ export default function Asignature(prop: IAsignature){
 
     //Buttons
     const doneBtn = () => {
-        asignatureContext?.taskDone(prop.id)
-        if(prop.isCheck) asignatureContext?.taskDelete(prop.id)
+        if(userCon?.isLogged){
+            asignatureContext?.taskDone(prop.id, userCon.user.user_id)
+            if(prop.isCheck) asignatureContext?.taskDelete(prop.id, userCon.user.user_id)
+        }
+
     }
     const deleteBtn = () => {
-        asignatureContext?.taskDelete(prop.id)
+        if(userCon?.isLogged)asignatureContext?.taskDelete(prop.id, userCon.user.user_id)
     }
     
     return(

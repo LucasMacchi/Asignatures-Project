@@ -1,6 +1,6 @@
 import "./Days.css"
 import { useState, useContext, useEffect } from "react"
-import { AsignaturesContext, GlobalContext } from "../../Context/Contexts"
+import { AsignaturesContext, GlobalContext, UserContext } from "../../Context/Contexts"
 import { Tabs, Tab, Box } from "@mui/material"
 import Asignature from "../Asignature/Asignature"
 import SortByHour from "../../utils/sortByHour"
@@ -10,6 +10,8 @@ export default function Days(){
     //context
     const asignatures = useContext(AsignaturesContext)
     const global = useContext(GlobalContext)
+    const userCon = useContext(UserContext)
+
 
     const changedTab = (e:any, value: number) => setDay(value)
     const currentDay = new Date().getDay()
@@ -17,8 +19,8 @@ export default function Days(){
 
     //Loader
     useEffect(() => {
-        if(!asignatures?.asignatures) asignatures?.getAllTasks()
-    },[])
+        if(!asignatures?.asignatures && userCon?.isLogged) asignatures?.getAllTasks(userCon.user.user_id)
+    },[userCon?.isLogged])
 
     const day_activities = (day: number) => {
         if(asignatures?.asignatures){

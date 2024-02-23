@@ -1,6 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import './App.css';
-import { GlobalContext } from './Context/Contexts';
+import { GlobalContext, UserContext } from './Context/Contexts';
 //import components
 import Header from './Components/Header/Header';
 import Days from './Components/Days/Days';
@@ -19,6 +19,7 @@ import UserData from './Components/Header/userData';
 function App() {
 
   const global = useContext(GlobalContext)
+  const user_state = useContext(UserContext)
 
   const handleAdd = () => {
     global?.changeDialogAddTask(true)
@@ -35,20 +36,27 @@ function App() {
     return(<Alert variant="filled" severity={global?.alertType}>{global?.alertText}</Alert>)
   }
 
+  const addTaskDisplay = () => {
+    if(user_state?.isLogged) {
+      return(
+        <div id='addBtn'>
+          <Fab color="primary" aria-label="add" onClick={handleAdd}>
+            <AddIcon />
+          </Fab>
+        </div>
+      )
+    }
+  }
+
 
   return (
       <div className="bigDiv" >
         <div className="App">
-        <UserState>
           <Header/>
           <AsignaturesState>
             {global?.type === 'week' && <Days/>}
             {global?.type === 'check' && <ToDoList/>}
-            <div id='addBtn'>
-              <Fab color="primary" aria-label="add" onClick={handleAdd}>
-                <AddIcon />
-              </Fab>
-            </div>
+            {addTaskDisplay()}
             <div id='alert'>
               {global?.alert && displayAlert()}
             </div>
@@ -57,7 +65,6 @@ function App() {
             {global?.changeDialogRegister && <Register/>}
             <UserData/>
           </AsignaturesState>
-        </UserState>
         </div>
       </div>
 

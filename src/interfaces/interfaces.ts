@@ -27,10 +27,10 @@ export interface IGlobalState {
 }
 export interface IAsigantureState{
     asignatures: IAsignature[] | null,
-    getAllTasks: () => void;
-    taskDone: (id: number) => void;
-    taskDelete: (id: number) => void;
-    taskUndone: (id: number) => void;
+    getAllTasks: (user_id: string) => void;
+    taskDone: (id: string, user_id: string) => void;
+    taskDelete: (id: string, user_id: string) => void;
+    taskUndone: (id: string, user_id: string) => void;
     taskAdd: (task: IAsignature_add) => void;
     
 }
@@ -59,7 +59,7 @@ export interface IAsignature{
     isExpire: boolean,
     day: Tdays,
     isCheck: boolean,
-    id: number
+    id: string
 }
 export interface IAsignature_add{
     title: string,
@@ -70,6 +70,7 @@ export interface IAsignature_add{
     isExpire: boolean,
     day: number,
     isCheck: boolean,
+    id: string
 }
 export interface Ilanguages {
     days: {
@@ -146,7 +147,8 @@ export interface IUserRegister{
 export interface IUser {
     username: string,
     email: string,
-    createdAt: Date
+    createdAt: Date,
+    user_id: string,
 }
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

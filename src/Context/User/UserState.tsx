@@ -9,7 +9,7 @@ const userReducer = (state: IUserState, action: IAction): IUserState => {
     const {payload, type} = action
     switch(type){
         case types.USER_LOG: 
-            return {...state,isLogged: payload.log, user:{email: payload.email, username: payload.username, createdAt: payload.createdAt}}
+            return {...state,isLogged: payload.log, user:{user_id: payload.user_id, email: payload.email, username: payload.username, createdAt: payload.createdAt}}
         default:
             return state
     }
@@ -29,7 +29,7 @@ export default function UserState(props: IPropsChildren) {
             if(access && access.email && access.username){
                 dispatch({
                     type: types.USER_LOG,
-                    payload: {email: access.email, username: access.username, createdAt: access.createdAt, log: true}
+                    payload: {user_id: access.user_id, email: access.email, username: access.username, createdAt: access.createdAt, log: true}
                 })
                 return true
             }
@@ -58,7 +58,7 @@ export default function UserState(props: IPropsChildren) {
 
     //--------------
     const initialState: IUserState = {
-        user: {email: "", username: "", createdAt: new Date},
+        user: {email: "", username: "", createdAt: new Date, user_id: ""},
         isLogged: false,
         login,
         register,

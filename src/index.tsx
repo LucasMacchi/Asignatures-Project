@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalState from './Context/Global/GlobalState';
+import UserState from './Context/User/UserState';
 //theme
 import { ThemeProvider } from '@emotion/react';
 import theme from './Theme/theme';
@@ -16,10 +17,11 @@ root.render(
   <ThemeProvider theme={theme}>
       <BrowserRouter>
         <React.StrictMode>
+          <UserState>
           <GlobalState>
             <App />
           </GlobalState>
-          
+          </UserState>  
       </React.StrictMode>
     </BrowserRouter>
   </ThemeProvider>

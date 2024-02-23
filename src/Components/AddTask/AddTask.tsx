@@ -1,6 +1,6 @@
 import './AddTask.css'
 import React, {useContext, useState, useEffect} from 'react';
-import { GlobalContext, AsignaturesContext } from '../../Context/Contexts';
+import { GlobalContext, AsignaturesContext, UserContext } from '../../Context/Contexts';
 
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
@@ -18,6 +18,7 @@ export default function AddTask () {
 
     const global = useContext(GlobalContext)
     const asignatureCont = useContext(AsignaturesContext)
+    const user_state = useContext(UserContext)
     const currentDay = new Date().getDay()
     const currentHour = new Date().getHours()
     const currentMinutes = new Date().getMinutes()
@@ -31,7 +32,8 @@ export default function AddTask () {
         isDone: false,
         isExpire: false,
         day: currentDay,
-        isCheck: false
+        isCheck: false,
+        id: ""
     })
 
     useEffect(() => {
@@ -55,12 +57,15 @@ export default function AddTask () {
     }
 
     const createTask = () => {
-        if(!btn){
+        if(!btn && user_state?.isLogged){
+            task.id = user_state.user.user_id
             console.log("TASK CREATED",task)
             asignatureCont?.taskAdd(task)
             global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})
             global?.changeDialogAddTask(false)  
-            emptyState()
+            setTimeout(() => {
+                emptyState()
+            }, 1000);
         }
 
     }

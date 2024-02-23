@@ -11,9 +11,9 @@ const asignatureRed = (state: IAsigantureState, action: IAction) : IAsigantureSt
         case t.GET_ALL_TASK:
             return {...state, asignatures: payload}
         case t.TASK_DONE:
-            const newState = state.asignatures?.map(as => {
-                if(as.id === payload) as.isDone = true
-                return as
+            const newState = state.asignatures?.map(task => {
+                if(task.id === payload) task.isDone = true
+                return task
             })
             if(newState) return {...state, asignatures: newState}
             else return state
@@ -43,9 +43,9 @@ const asignatureRed = (state: IAsigantureState, action: IAction) : IAsigantureSt
 
 export default function AsignaturesState(props: IPropsChildren){
     //actions//--------------
-    const getAllTasks = async () => {
+    const getAllTasks = async (user_id: string) => {
         try {
-            const tasks = await axios.get('http://localhost:3400/task/all')
+            const tasks = await axios.get('http://localhost:3400/task/all/'+user_id)
             console.log("LOADING TASKS",tasks)
             dispatch({
                 type: t.GET_ALL_TASK,
@@ -56,39 +56,39 @@ export default function AsignaturesState(props: IPropsChildren){
         }
 
     }
-    const taskDone = async (id: number) => {
+    const taskDone = async (task_id: string, user_id: string) => {
         try {
-            await axios.patch('http://localhost:3400/task/done/'+id)
-            console.log("TASK "+id+" DONE")
+            await axios.patch('http://localhost:3400/task/done', {task_id, user_id})
+            console.log("TASK "+task_id+" DONE")
             dispatch({
                 type: t.TASK_DONE,
-                payload: id
+                payload: task_id
             })        
         } catch (error) {
             console.log("ERROR: ",error)
         }
 
     }
-    const taskDelete = async (id: number) => {
+    const taskDelete = async (task_id: string, user_id: string) => {
         try {
-            await axios.delete('http://localhost:3400/task/delete/'+id)
-            console.log("TASK "+id+" DELETED")
+            await axios.delete('http://localhost:3400/task/delete', {data: {task_id, user_id}})
+            console.log("TASK "+task_id+" DELETED")
             dispatch({
                 type: t.TASK_DELETE,
-                payload: id
+                payload: task_id
             })
         } catch (error) {
             console.log("ERROR: ",error)
         }
 
     }
-    const taskUndone = async (id: number) => {
+    const taskUndone = async (task_id: string, user_id: string) => {
         try {
-            await axios.patch('http://localhost:3400/task/undone/'+id)
-            console.log("TASK "+id+" UNDONE")
+            await axios.patch('http://localhost:3400/task/undone', {task_id, user_id})
+            console.log("TASK "+task_id+" UNDONE")
             dispatch({
                 type: t.TASK_UNDONE,
-                payload: id
+                payload: task_id
             })
         } catch (error) {
             console.log("ERROR: ",error)
