@@ -27,7 +27,8 @@ export const english: Ilanguages = {
         sign_up_btn: "SIGN UP",
         log_title: "Log in",
         restore_password: "Type your Email",
-        restore_btn: "Restore"
+        restore_btn: "Restore",
+        restore_password_text: "Click here to restore your password"
     },
     register: {
         title: "SIGN UP",

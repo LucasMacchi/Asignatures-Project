@@ -104,7 +104,8 @@ export interface Ilanguages {
         sign_up_btn: string,
         log_title: string,
         restore_password: string,
-        restore_btn: string
+        restore_btn: string,
+        restore_password_text: string
     },
     register: {
         title: string,

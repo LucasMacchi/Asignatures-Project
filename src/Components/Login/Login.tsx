@@ -14,6 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import Link from "@mui/material/Link";
 
 export default function Login () {
 
@@ -29,7 +30,7 @@ export default function Login () {
         email: "",
         password: ""
     })
-    const [loginMode, setMode] = useState(false)
+    const [loginMode, setMode] = useState(true)
     const [loading, setLoad] = useState(false)
 
     const handleClose = () => {
@@ -89,6 +90,9 @@ export default function Login () {
                 <Box sx={{marginTop: 2}}>
                     <TextField type="password" error={formsError.passwordError} helperText={formsError.passwordMsg} fullWidth id="password" size="small" variant="filled" label={global?.translation.login.password} color="secondary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
                 </Box>
+                <Box>
+                    <Button size="small" color="secondary" variant="text" onClick={() => setMode(false)}>{global?.translation.login.restore_password_text}</Button>
+                </Box>
            </Box> 
         )
     }
@@ -97,6 +101,7 @@ export default function Login () {
             <Box>
                 <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={global?.translation.login.email} color="secondary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>
             </Box>
+            
         )
     }
     const title = () => {

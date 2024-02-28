@@ -27,7 +27,8 @@ export const spanish: Ilanguages = {
         sign_up_btn: "REGISTRARSE",
         log_title: "Ingresar",
         restore_password: "Escribe tu Email",
-        restore_btn: "Recuperar"
+        restore_btn: "Recuperar",
+        restore_password_text: "Haga click aqui para cambiar su contraseña"
     },
     register: {
         title: "REGISTRARSE",
