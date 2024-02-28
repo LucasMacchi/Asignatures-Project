@@ -24,7 +24,10 @@ export const english: Ilanguages = {
         email: "Email",
         password: "Password",
         log_btn: "LOGIN",
-        sign_up_btn: "SIGN UP"
+        sign_up_btn: "SIGN UP",
+        log_title: "Log in",
+        restore_password: "Type your Email",
+        restore_btn: "Restore"
     },
     register: {
         title: "SIGN UP",
@@ -36,19 +39,37 @@ export const english: Ilanguages = {
         register_btn: "SIGN UP"
     },
     user_info: {
-        user_information: "User Information"
+        user_information: "User Information",
+        email: "Email:",
+        password: "Password:",
+        username: "Username:",
+        change_password: "Change Password",
+        change_username: "Change Username",
+        logout: "LOGOUT"
+
     },
     alerts: {
         new_task: "NEW TASK CREATED",
         error_user_register: "ERROR TO CREATE NEW USER, TRY OTHER EMAIL",
         new_user_register: "NEW USER CREATED",
         login_success: "LOGGED SUCCESSFULLY",
-        login_error: "ERROR TO LOGIN, CHECK CREDENTIALS"
+        login_error: "ERROR TO LOGIN, CHECK CREDENTIALS",
+        mail_password_reset: "Check your email to continue changing your password",
+        password_changed_succ: "Password Succesfully changed",
+        password_changed_error: "Error to change Password",
+        username_changed_succ: "Username Succesfully changed",
+        username_changed_error: "Error to change Username"
     },
     task:{
         title: "Title",
         description: "Description",
         time: "Time",
         create_task: "Create Task"
+    },
+    changer: {
+        password_btn: "Change Password",
+        username: "Change Username",
+        username_title: "Change your Username",
+        password_title: "Change your Password"
     }
 }

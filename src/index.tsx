@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {BrowserRouter} from "react-router-dom"
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalState from './Context/Global/GlobalState';
 import UserState from './Context/User/UserState';
+import Changer from './Components/Changer/Changer';
 //theme
 import { ThemeProvider } from '@emotion/react';
 import theme from './Theme/theme';
@@ -19,7 +20,11 @@ root.render(
         <React.StrictMode>
           <UserState>
           <GlobalState>
-            <App />
+            <Routes>
+              <Route  path="*" element={<App />}/>
+              <Route  path="/prestoration/:user_id/:token_id" element={<Changer/>}/>
+              <Route  path="/urestoration" element={<Changer/>}/>
+            </Routes>
           </GlobalState>
           </UserState>  
       </React.StrictMode>

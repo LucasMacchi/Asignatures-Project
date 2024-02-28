@@ -1,7 +1,7 @@
 import "./Header.css"
 import { useState, useContext, useEffect } from "react";
 import { GlobalContext, UserContext } from "../../Context/Contexts";
-
+import UserData from "./userData";
 //Material import
 import { AppBar, Box, Menu } from "@mui/material";
 import Tabs from '@mui/material/Tabs';
@@ -44,22 +44,12 @@ function Header(){
         global?.changeDialogLogin(true)
     }
 
-    const userData = () => {
-
-    }
-
     const loginDisplay = () => {
         if(userCon?.isLogged){
             return(
                 <Box display={"flex"} alignItems={"center"}>
-                    <IconButton color="secondary" aria-label="account">
-                        <AccountBoxIcon sx={{marginLeft: 2}}/>
-                    </IconButton>
-                    <IconButton color="secondary" aria-label="logout">
-                        <LogoutIcon sx={{marginLeft: 2}}/>
-                    </IconButton>
+                    <UserData/>
                 </Box>
-
             )
         }
         else{
@@ -82,7 +72,7 @@ function Header(){
                 </Tabs>
                 <div id="Login-button">
                     <LanguageIcon fontSize="large"/>
-                        <FormControl sx={{minWidth: 120}}>
+                        <FormControl sx={{minWidth: 80}}>
                             <Select id="language_selector" value={global?.language} onChange={changeLanguage}>
                                 <MenuItem color="secondary" value={'en'}>EN</MenuItem>
                                 <MenuItem value={'spa'}>SPA</MenuItem>

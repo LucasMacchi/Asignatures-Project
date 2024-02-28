@@ -24,7 +24,10 @@ export const spanish: Ilanguages = {
         email: "Email",
         password: "Contraseña",
         log_btn: "INGRESAR",
-        sign_up_btn: "REGISTRARSE"
+        sign_up_btn: "REGISTRARSE",
+        log_title: "Ingresar",
+        restore_password: "Escribe tu Email",
+        restore_btn: "Recuperar"
     },
     register: {
         title: "REGISTRARSE",
@@ -36,19 +39,37 @@ export const spanish: Ilanguages = {
         register_btn: "REGISTRARSE"
     },
     user_info: {
-        user_information: "Informacion del Usuario"
+        user_information: "Informacion del Usuario",
+        email: "Email:",
+        password: "Contraseña:",
+        username: "Nombre de Usuario:",
+        change_password: "Cambiar Contraseña",
+        change_username: "Cambiar Nombre de Usuario",
+        logout: "Cerrar Sesion"
     },
     alerts: {
         new_task: "NUEVA TAREA A SIDO CREADA",
         error_user_register: "ERROR AL CREAR USUARIO, INTENTA OTRO CORREO",
         new_user_register: "NUEVO USUARIO RESGISTRADO",
         login_success: "INGRESO EXITOSAMENTE",
-        login_error: "ERROR AL INGRESAR, VERIFIQUE LOS DATOS"
+        login_error: "ERROR AL INGRESAR, VERIFIQUE LOS DATOS",
+        mail_password_reset: "Chequea tu correo para cambiar tu contraseña",
+        password_changed_succ: "Password Succesfully changed",
+        password_changed_error: "Error to change Password",
+        username_changed_succ: "Username Succesfully changed",
+        username_changed_error: "Error to change Username"
+
     },
     task:{
         title: "Titulo",
         description: "Descripcion",
         time: "Horario",
         create_task: "Crear Tarea"
+    },
+    changer: {
+        password_btn: "Cambiar Contraseña",
+        username: "Cambiar Nombre de Usuario",
+        username_title: "Cambia tu Nombre de Usuario",
+        password_title: "Cambia tu Contraseña"
     }
 }

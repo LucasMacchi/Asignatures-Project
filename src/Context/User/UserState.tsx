@@ -10,6 +10,10 @@ const userReducer = (state: IUserState, action: IAction): IUserState => {
     switch(type){
         case types.USER_LOG: 
             return {...state,isLogged: payload.log, user:{user_id: payload.user_id, email: payload.email, username: payload.username, createdAt: payload.createdAt}}
+        case types.CHANGE_USERNAME:
+            const newState = state
+            newState.user.username = payload
+            return newState
         default:
             return state
     }
@@ -44,16 +48,61 @@ export default function UserState(props: IPropsChildren) {
 
     const register = async (email: string, username: string, password: string): Promise<Boolean> => {
         try {
-            console.log("aca3")
             const userToRegister = {email, username, password}
             const registerRoute: boolean = await (await axios.post('http://localhost:3400/user/register', userToRegister)).data
-            console.log("REGISTER = ",registerRoute)
             return registerRoute
         } catch (error) {
             console.log("ERROR: ",error)
             return false
         }
     }
+
+    const request_password_change_email = async (email: string): Promise<boolean> => {
+        try {
+            const response: boolean = await (await axios.post('http://localhost:3400/user/email/password/'+email)).data
+            return response
+        } catch (error) {
+            console.log("ERROR: ",error)
+            return false
+        }
+    }
+
+    const request_password_change = async (user_id: string): Promise<boolean> => {
+        try {
+            const response: boolean = await (await axios.post('http://localhost:3400/user/password/token/'+user_id)).data
+            return response
+        } catch (error) {
+            console.log("ERROR: ",error)
+            return false
+        }
+    }
+
+    const change_password = async (token_id: string, user_id: string, new_password: string): Promise<boolean> => {
+        try {
+            const body = {
+                token_id,
+                user_id,
+                new_password
+            }
+            const response: boolean = await  (await axios.patch('http://localhost:3400/user/password', body)).data
+            return response
+        } catch (error) {
+            console.log("ERROR: ",error)
+            return false
+        }
+    }
+    const change_username = async (user_id: string, new_username: string): Promise<boolean> => {
+        try {
+            const response = await (await axios.patch('http://localhost:3400/user/username/'+user_id+'/'+new_username)).data
+            dispatch({payload: new_username, type: types.CHANGE_USERNAME})
+            return response
+        } catch (error) {
+            console.log("ERROR: ",error)
+            return false
+        }
+    }
+
+
     const logout = async () => {}
 
     //--------------
@@ -62,7 +111,11 @@ export default function UserState(props: IPropsChildren) {
         isLogged: false,
         login,
         register,
-        logout
+        logout,
+        change_username,
+        request_password_change,
+        request_password_change_email,
+        change_password
     }
 
     const [state, dispatch] = useReducer(userReducer,initialState)

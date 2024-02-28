@@ -12,6 +12,7 @@ const TASK_UNDONE = "task_undone"
 const TASK_ADD = "task_add"
 
 const USER_LOG = "user_log"
+const CHANGE_USERNAME = "change_username"
 
 export default {
     CHANGE_LANGUAGE,
@@ -25,5 +26,6 @@ export default {
     TASK_UNDONE,
     TASK_ADD,
     CHANGE_ALERT,
-    USER_LOG
+    USER_LOG,
+    CHANGE_USERNAME
 }

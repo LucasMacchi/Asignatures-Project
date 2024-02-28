@@ -41,6 +41,10 @@ export interface IUserState {
     login: (email: string, password: string) => Promise<boolean>;
     register: (email: string, username: string, password: string) => Promise<Boolean>;
     logout: () => void;
+    change_username: (user_id: string, new_username: string) => Promise<Boolean>;
+    request_password_change: (user_id: string) => Promise<boolean>;
+    request_password_change_email: (email: string) => Promise<boolean>;
+    change_password: (token_id: string, user_id: string, new_password: string) => Promise<boolean>;
 }
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]
@@ -97,7 +101,10 @@ export interface Ilanguages {
         email: string,
         password: string,
         log_btn: string,
-        sign_up_btn: string
+        sign_up_btn: string,
+        log_title: string,
+        restore_password: string,
+        restore_btn: string
     },
     register: {
         title: string,
@@ -109,21 +116,39 @@ export interface Ilanguages {
         register_btn: string
     },
     user_info: {
-        user_information: string
+        user_information: string,
+        email: string,
+        username: string,
+        password: string,
+        change_password: string,
+        change_username: string,
+        logout: string
     },
     alerts: {
         new_task: string,
         error_user_register: string,
         new_user_register: string,
         login_success: string,
-        login_error: string
+        login_error: string,
+        mail_password_reset: string,
+        password_changed_succ: string,
+        password_changed_error: string,
+        username_changed_succ: string,
+        username_changed_error: string
     },
     task:{
         title: string,
         description: string,
         time: string,
         create_task: string
+    },
+    changer: {
+        password_btn: string,
+        username: string,
+        password_title: string,
+        username_title: string
     }
+
 }
 export interface IAlert{
     status: boolean,

@@ -63,7 +63,6 @@ function App() {
             {global?.changeDialogAddTask && <AddTask/>}
             {global?.changeDialogLogin && <Login/>}
             {global?.changeDialogRegister && <Register/>}
-            <UserData/>
           </AsignaturesState>
         </div>
       </div>
