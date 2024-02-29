@@ -50,15 +50,16 @@ export const spanish: Ilanguages = {
     },
     alerts: {
         new_task: "NUEVA TAREA A SIDO CREADA",
+        error_new_task: "ERROR AL CREAR NUEVA TAREA",
         error_user_register: "ERROR AL CREAR USUARIO, INTENTA OTRO CORREO",
         new_user_register: "NUEVO USUARIO RESGISTRADO",
         login_success: "INGRESO EXITOSAMENTE",
         login_error: "ERROR AL INGRESAR, VERIFIQUE LOS DATOS",
         mail_password_reset: "Chequea tu correo para cambiar tu contraseña",
-        password_changed_succ: "Password Succesfully changed",
-        password_changed_error: "Error to change Password",
-        username_changed_succ: "Username Succesfully changed",
-        username_changed_error: "Error to change Username"
+        password_changed_succ: "Contraseña cambiada exitosamente",
+        password_changed_error: "Error al cambiar contraseña",
+        username_changed_succ: "Nombre de usuario cambiado exitosamente",
+        username_changed_error: "Error al cambiar el nombre de usuario"
 
     },
     task:{

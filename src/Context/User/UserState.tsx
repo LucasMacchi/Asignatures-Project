@@ -1,6 +1,7 @@
 import React, {useReducer, createContext} from "react";
 import { IUserState, IAction, IPropsChildren, IUser } from "../../interfaces/interfaces";
 import { UserContext } from "../Contexts";
+import { deleteJWT, getJWT } from "../../utils/sessionJwt";
 import types from "../Types";
 import axios from "axios";
 
@@ -14,6 +15,8 @@ const userReducer = (state: IUserState, action: IAction): IUserState => {
             const newState = state
             newState.user.username = payload
             return newState
+        case types.USER_LOGOUT:
+            return payload
         default:
             return state
     }
@@ -35,6 +38,10 @@ export default function UserState(props: IPropsChildren) {
                     type: types.USER_LOG,
                     payload: {user_id: access.user_id, email: access.email, username: access.username, createdAt: access.createdAt, log: true}
                 })
+                if(access.jwt){
+                    deleteJWT()
+                    localStorage.setItem('jwtToken', access.jwt);
+                }
                 return true
             }
             else{
@@ -69,7 +76,7 @@ export default function UserState(props: IPropsChildren) {
 
     const request_password_change = async (user_id: string): Promise<boolean> => {
         try {
-            const response: boolean = await (await axios.post('http://localhost:3400/user/password/token/'+user_id)).data
+            const response: boolean = await (await axios.post('http://localhost:3400/user/password/token/'+user_id, {}, {headers: {Authorization: getJWT()}})).data
             return response
         } catch (error) {
             console.log("ERROR: ",error)
@@ -93,7 +100,8 @@ export default function UserState(props: IPropsChildren) {
     }
     const change_username = async (user_id: string, new_username: string): Promise<boolean> => {
         try {
-            const response = await (await axios.patch('http://localhost:3400/user/username/'+user_id+'/'+new_username)).data
+            
+            const response = await (await axios.patch('http://localhost:3400/user/username/'+user_id+'/'+new_username, {}, {headers: {Authorization: getJWT()}})).data
             dispatch({payload: new_username, type: types.CHANGE_USERNAME})
             return response
         } catch (error) {
@@ -101,9 +109,37 @@ export default function UserState(props: IPropsChildren) {
             return false
         }
     }
+    const session = async (): Promise<boolean> => {
+        try {
+            const jwt = getJWT()
+            if(jwt){
+                const response = await (await axios.get('http://localhost:3400/user/session/'+jwt)).data
+                if(response.user_id){
+                    dispatch({
+                        type: types.USER_LOG,
+                        payload: {user_id: response.user_id, email: response.email, username: response.username, createdAt: response.createdAt, log: true}
+                    })
+                    if(response.jwt){
+                        deleteJWT()
+                        localStorage.setItem('jwtToken', response.jwt);
+                    }
+                    return true
+                }
+            }
+            deleteJWT()
+            return false
+        } catch (error) {
+            console.log("ERROR: ",error)
+            deleteJWT()
+            return false
+        }
+    }
 
 
-    const logout = async () => {}
+    const logout = async () => {
+        deleteJWT()
+        dispatch({payload: initialState, type: types.USER_LOGOUT})
+    }
 
     //--------------
     const initialState: IUserState = {
@@ -115,7 +151,8 @@ export default function UserState(props: IPropsChildren) {
         change_username,
         request_password_change,
         request_password_change_email,
-        change_password
+        change_password,
+        session
     }
 
     const [state, dispatch] = useReducer(userReducer,initialState)

@@ -17,12 +17,14 @@ export interface IGlobalState {
     alertText: string,
     alertType: "error" | "warning" | "success" 
     translation: Ilanguages,
+    daySelected: number,
     changeLanguage: (payload: string) => void;
     changeType: (payload: string) => void;
     changeDialogLogin: (payload: boolean) => void;
     changeDialogAddTask: (payload: boolean) => void;
     changeDialogRegister: (payload: boolean) => void;
     changeAlert: (payload: IAlert) => void;
+    changeCurrentDay: (payload: number) => void;
 
 }
 export interface IAsigantureState{
@@ -31,7 +33,7 @@ export interface IAsigantureState{
     taskDone: (id: string, user_id: string) => void;
     taskDelete: (id: string, user_id: string) => void;
     taskUndone: (id: string, user_id: string) => void;
-    taskAdd: (task: IAsignature_add) => void;
+    taskAdd: (task: IAsignature_add) => Promise<boolean> ;
     
 }
 
@@ -45,6 +47,7 @@ export interface IUserState {
     request_password_change: (user_id: string) => Promise<boolean>;
     request_password_change_email: (email: string) => Promise<boolean>;
     change_password: (token_id: string, user_id: string, new_password: string) => Promise<boolean>;
+    session: () => Promise<boolean>;
 }
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]
@@ -127,6 +130,7 @@ export interface Ilanguages {
     },
     alerts: {
         new_task: string,
+        error_new_task: string,
         error_user_register: string,
         new_user_register: string,
         login_success: string,
@@ -175,6 +179,7 @@ export interface IUser {
     email: string,
     createdAt: Date,
     user_id: string,
+    jwt?: string
 }
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -182,4 +187,5 @@ export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const minutes: number[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40
 ,41,42,43,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59] 
 export const hours: number[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
 

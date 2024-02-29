@@ -41,6 +41,11 @@ const globalRed =  (state: IGlobalState, action: IAction): IGlobalState => {
                 alertText: payload.text,
                 alertType: payload.type
             }
+        case types.CHANGE_CURRENT_DAY:
+            return{
+                ...state,
+                daySelected: payload
+            }
         default:
             return state
     }
@@ -90,6 +95,12 @@ export default function GlobalState(props: IPropsChildren){
             payload: payload
         })
     }
+    const changeCurrentDay = (payload: number) => {
+        dispatch({
+            type: types.CHANGE_CURRENT_DAY,
+            payload: payload
+        })
+    }
     //--------------
     const initialState: IGlobalState = {
         language: 'en',
@@ -100,13 +111,15 @@ export default function GlobalState(props: IPropsChildren){
         alert: false,
         alertText: "",
         alertType: "success",
+        daySelected: new Date().getDay(),
         translation: changeTranslation('en'),
         changeLanguage,
         changeType,
         changeDialogLogin,
         changeDialogAddTask,
         changeDialogRegister,
-        changeAlert
+        changeAlert,
+        changeCurrentDay
     }
     const [state, dispatch] = useReducer(globalRed,initialState)
     

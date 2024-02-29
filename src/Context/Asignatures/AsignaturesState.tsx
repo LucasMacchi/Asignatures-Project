@@ -3,6 +3,7 @@ import { IAsigantureState, IPropsChildren,IAction, IAsignature_add } from "../..
 import { AsignaturesContext } from "../Contexts";
 import t from "../Types";
 import axios from "axios";
+import { getJWT } from "../../utils/sessionJwt";
 
 //Reducer//------------------------------------------
 const asignatureRed = (state: IAsigantureState, action: IAction) : IAsigantureState => {
@@ -45,7 +46,7 @@ export default function AsignaturesState(props: IPropsChildren){
     //actions//--------------
     const getAllTasks = async (user_id: string) => {
         try {
-            const tasks = await axios.get('http://localhost:3400/task/all/'+user_id)
+            const tasks = await axios.get('http://localhost:3400/task/all/'+user_id, {headers: {Authorization: getJWT()}})
             console.log("LOADING TASKS",tasks)
             dispatch({
                 type: t.GET_ALL_TASK,
@@ -58,7 +59,7 @@ export default function AsignaturesState(props: IPropsChildren){
     }
     const taskDone = async (task_id: string, user_id: string) => {
         try {
-            await axios.patch('http://localhost:3400/task/done', {task_id, user_id})
+            await axios.patch('http://localhost:3400/task/done', {task_id, user_id}, {headers: {Authorization: getJWT()}})
             console.log("TASK "+task_id+" DONE")
             dispatch({
                 type: t.TASK_DONE,
@@ -71,7 +72,7 @@ export default function AsignaturesState(props: IPropsChildren){
     }
     const taskDelete = async (task_id: string, user_id: string) => {
         try {
-            await axios.delete('http://localhost:3400/task/delete', {data: {task_id, user_id}})
+            await axios.delete('http://localhost:3400/task/delete', {data: {task_id, user_id}, headers: {Authorization: getJWT()}})
             console.log("TASK "+task_id+" DELETED")
             dispatch({
                 type: t.TASK_DELETE,
@@ -84,7 +85,7 @@ export default function AsignaturesState(props: IPropsChildren){
     }
     const taskUndone = async (task_id: string, user_id: string) => {
         try {
-            await axios.patch('http://localhost:3400/task/undone', {task_id, user_id})
+            await axios.patch('http://localhost:3400/task/undone', {task_id, user_id}, {headers: {Authorization: getJWT()}})
             console.log("TASK "+task_id+" UNDONE")
             dispatch({
                 type: t.TASK_UNDONE,
@@ -94,11 +95,14 @@ export default function AsignaturesState(props: IPropsChildren){
             console.log("ERROR: ",error)
         }
     }
-    const taskAdd = async (task: IAsignature_add) => {
+    const taskAdd = async (task: IAsignature_add): Promise<boolean> => {
         try {
-            await axios.post('http://localhost:3400/task/add', task)
+            console.log(task)
+            const res: boolean = await (await axios.post('http://localhost:3400/task/add', task, {headers: {Authorization: getJWT()}})).data
+            return res
         } catch (error) {
             console.log("ERROR: ",error)
+            return false
         }
 
     }

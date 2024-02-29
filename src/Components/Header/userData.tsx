@@ -56,7 +56,8 @@ export default function UserData () {
 
     }
     const logout_btn = () => {
-
+        userCon?.logout()
+        document.location.reload()
     }
 
     return(
@@ -81,7 +82,7 @@ export default function UserData () {
                         <Button disabled={loading} variant="contained" color="secondary" size="small" onClick={change_password_btn}>{global?.translation.user_info.change_password}</Button>
                     </Box>
                     <Box>
-                        <Button startIcon={<LogoutIcon />} variant="contained" color="secondary" size="small" sx={{marginTop: 2}}>{global?.translation.user_info.logout}</Button>
+                        <Button startIcon={<LogoutIcon />} variant="contained" color="secondary" size="small" sx={{marginTop: 2}} onClick={logout_btn}>{global?.translation.user_info.logout}</Button>
                     </Box>
                 </AccordionDetails>
             </Accordion>

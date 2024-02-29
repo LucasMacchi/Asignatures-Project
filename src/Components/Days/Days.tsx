@@ -22,6 +22,11 @@ export default function Days(){
         if(!asignatures?.asignatures && userCon?.isLogged) asignatures?.getAllTasks(userCon.user.user_id)
     },[userCon?.isLogged])
 
+    useEffect(() => {
+        global?.changeCurrentDay(day)
+        console.log("DAY ",day)
+    },[day])
+
     const day_activities = (day: number) => {
         if(asignatures?.asignatures){
             return(

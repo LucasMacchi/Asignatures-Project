@@ -51,6 +51,7 @@ export const english: Ilanguages = {
     },
     alerts: {
         new_task: "NEW TASK CREATED",
+        error_new_task: "ERROR TO CREATE NEW TASK",
         error_user_register: "ERROR TO CREATE NEW USER, TRY OTHER EMAIL",
         new_user_register: "NEW USER CREATED",
         login_success: "LOGGED SUCCESSFULLY",

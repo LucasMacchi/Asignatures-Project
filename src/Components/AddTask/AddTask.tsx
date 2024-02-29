@@ -20,6 +20,7 @@ export default function AddTask () {
     const asignatureCont = useContext(AsignaturesContext)
     const user_state = useContext(UserContext)
     const currentDay = new Date().getDay()
+    const daySelected = global?.daySelected
     const currentHour = new Date().getHours()
     const currentMinutes = new Date().getMinutes()
 
@@ -31,7 +32,7 @@ export default function AddTask () {
         minutes: currentMinutes,
         isDone: false,
         isExpire: false,
-        day: currentDay,
+        day: daySelected ? daySelected : currentDay,
         isCheck: false,
         id: ""
     })
@@ -42,7 +43,9 @@ export default function AddTask () {
 
 
     useEffect(() => {
-        if(task.day && task.title && task.hour && task.description) setBtn(false)
+        if(task.day && task.title && task.hour && task.description) {
+            setBtn(false)
+        }
         else{setBtn(true)}
     },[task])
 
@@ -56,16 +59,28 @@ export default function AddTask () {
         task.title = ""
     }
 
-    const createTask = () => {
+    const createTask = async () => {
         if(!btn && user_state?.isLogged){
             task.id = user_state.user.user_id
+            task.day = daySelected ? daySelected : currentDay
             console.log("TASK CREATED",task)
-            asignatureCont?.taskAdd(task)
-            global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})
-            global?.changeDialogAddTask(false)  
-            setTimeout(() => {
-                emptyState()
-            }, 1000);
+            const response = await asignatureCont?.taskAdd(task)
+            if(response){
+                global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})
+                global?.changeDialogAddTask(false)  
+                setTimeout(() => {
+                    emptyState()
+                    document.location.reload()
+                }, 1000);
+            }
+            else{
+                global?.changeAlert({status: true, text: global?.translation.alerts.error_new_task, type: "error"})
+                setTimeout(() => {
+                    emptyState()
+                    document.location.reload()
+                }, 1000);
+            }
+
         }
 
     }
