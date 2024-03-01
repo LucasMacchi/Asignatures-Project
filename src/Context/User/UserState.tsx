@@ -5,6 +5,8 @@ import { deleteJWT, getJWT } from "../../utils/sessionJwt";
 import types from "../Types";
 import axios from "axios";
 
+const serverUrl = process.env.REACT_APP_SERVER_URL
+
 //Reducer//------------------------------------------
 const userReducer = (state: IUserState, action: IAction): IUserState => {
     const {payload, type} = action
@@ -31,8 +33,7 @@ export default function UserState(props: IPropsChildren) {
     const login = async (email: string, password: string): Promise<boolean> => {
         try {
             const userToLog = {email,password}
-            const access: IUser = await (await axios.post('http://localhost:3400/user/login', userToLog)).data
-            console.log("USER ACCESS = ",access)
+            const access: IUser = await (await axios.post(serverUrl+'/user/login', userToLog)).data
             if(access && access.email && access.username){
                 dispatch({
                     type: types.USER_LOG,
@@ -56,7 +57,7 @@ export default function UserState(props: IPropsChildren) {
     const register = async (email: string, username: string, password: string): Promise<Boolean> => {
         try {
             const userToRegister = {email, username, password}
-            const registerRoute: boolean = await (await axios.post('http://localhost:3400/user/register', userToRegister)).data
+            const registerRoute: boolean = await (await axios.post(serverUrl+'/user/register', userToRegister)).data
             return registerRoute
         } catch (error) {
             console.log("ERROR: ",error)
@@ -66,7 +67,7 @@ export default function UserState(props: IPropsChildren) {
 
     const request_password_change_email = async (email: string): Promise<boolean> => {
         try {
-            const response: boolean = await (await axios.post('http://localhost:3400/user/email/password/'+email)).data
+            const response: boolean = await (await axios.post(serverUrl+'/user/email/password/'+email)).data
             return response
         } catch (error) {
             console.log("ERROR: ",error)
@@ -76,7 +77,7 @@ export default function UserState(props: IPropsChildren) {
 
     const request_password_change = async (user_id: string): Promise<boolean> => {
         try {
-            const response: boolean = await (await axios.post('http://localhost:3400/user/password/token/'+user_id, {}, {headers: {Authorization: getJWT()}})).data
+            const response: boolean = await (await axios.post(serverUrl+'/user/password/token/'+user_id, {}, {headers: {Authorization: getJWT()}})).data
             return response
         } catch (error) {
             console.log("ERROR: ",error)
@@ -91,7 +92,7 @@ export default function UserState(props: IPropsChildren) {
                 user_id,
                 new_password
             }
-            const response: boolean = await  (await axios.patch('http://localhost:3400/user/password', body)).data
+            const response: boolean = await  (await axios.patch(serverUrl+'/user/password', body)).data
             return response
         } catch (error) {
             console.log("ERROR: ",error)
@@ -101,7 +102,7 @@ export default function UserState(props: IPropsChildren) {
     const change_username = async (user_id: string, new_username: string): Promise<boolean> => {
         try {
             
-            const response = await (await axios.patch('http://localhost:3400/user/username/'+user_id+'/'+new_username, {}, {headers: {Authorization: getJWT()}})).data
+            const response = await (await axios.patch(serverUrl+'/user/username/'+user_id+'/'+new_username, {}, {headers: {Authorization: getJWT()}})).data
             dispatch({payload: new_username, type: types.CHANGE_USERNAME})
             return response
         } catch (error) {
@@ -113,7 +114,7 @@ export default function UserState(props: IPropsChildren) {
         try {
             const jwt = getJWT()
             if(jwt){
-                const response = await (await axios.get('http://localhost:3400/user/session/'+jwt)).data
+                const response = await (await axios.get(serverUrl+'/user/session/'+jwt)).data
                 if(response.user_id){
                     dispatch({
                         type: types.USER_LOG,

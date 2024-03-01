@@ -63,7 +63,6 @@ export default function AddTask () {
         if(!btn && user_state?.isLogged){
             task.id = user_state.user.user_id
             task.day = daySelected ? daySelected : currentDay
-            console.log("TASK CREATED",task)
             const response = await asignatureCont?.taskAdd(task)
             if(response){
                 global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})

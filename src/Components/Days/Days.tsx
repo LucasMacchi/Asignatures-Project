@@ -24,7 +24,6 @@ export default function Days(){
 
     useEffect(() => {
         global?.changeCurrentDay(day)
-        console.log("DAY ",day)
     },[day])
 
     const day_activities = (day: number) => {
