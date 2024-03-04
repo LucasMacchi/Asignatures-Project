@@ -1,1 +1,1 @@
-SERVER_URL = url for api
+REACT_APP_SERVER_URL = url for api

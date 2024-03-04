@@ -22,11 +22,6 @@ export default function Asignature(prop: IAsignature){
 
     const [status, setStatus] = useState("")
 
-    useEffect(() => {
-        if(userCon?.isLogged) asignatureContext?.taskUndone(asignature.id, userCon.user.user_id)
-        
-    },[])
-
     //functions
     const renderBtns = () => {
         if(!prop.isDone){
