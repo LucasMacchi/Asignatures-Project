@@ -43,7 +43,7 @@ export default function AddTask () {
 
 
     useEffect(() => {
-        if(task.day && task.title && task.hour && task.description) {
+        if( task.title && task.hour && task.description) {
             setBtn(false)
         }
         else{setBtn(true)}
