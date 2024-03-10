@@ -1,5 +1,5 @@
 import './AddTask.css'
-import React, {useContext, useState, useEffect} from 'react';
+import {useContext, useState, useEffect} from 'react';
 import { GlobalContext, AsignaturesContext, UserContext } from '../../Context/Contexts';
 
 import Backdrop from '@mui/material/Backdrop';

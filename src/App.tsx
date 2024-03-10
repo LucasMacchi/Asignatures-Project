@@ -1,11 +1,10 @@
-import React, {useContext, useState, useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 import './App.css';
 import { GlobalContext, UserContext } from './Context/Contexts';
 //import components
 import Header from './Components/Header/Header';
 import Days from './Components/Days/Days';
 import AsignaturesState from './Context/Asignatures/AsignaturesState';
-import UserState from './Context/User/UserState';
 import ToDoList from './Components/TodoList/ToDoList';
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';

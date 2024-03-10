@@ -1,4 +1,4 @@
-import React, {useReducer, createContext} from "react";
+import {useReducer} from "react";
 import { IGlobalState, IPropsChildren,IAction, IAlert } from "../../interfaces/interfaces";
 import { GlobalContext } from "../Contexts";
 import types from "../Types";

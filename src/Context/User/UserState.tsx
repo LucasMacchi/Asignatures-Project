@@ -1,4 +1,4 @@
-import React, {useReducer, createContext} from "react";
+import {useReducer} from "react";
 import { IUserState, IAction, IPropsChildren, IUser } from "../../interfaces/interfaces";
 import { UserContext } from "../Contexts";
 import { deleteJWT, getJWT } from "../../utils/sessionJwt";

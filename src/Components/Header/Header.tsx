@@ -3,7 +3,7 @@ import { useState, useContext, useEffect } from "react";
 import { GlobalContext, UserContext } from "../../Context/Contexts";
 import UserData from "./userData";
 //Material import
-import { AppBar, Box, Menu } from "@mui/material";
+import { AppBar, Box } from "@mui/material";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Button from "@mui/material/Button";
@@ -13,11 +13,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import LanguageIcon from '@mui/icons-material/Language';
-import LogoutIcon from '@mui/icons-material/Logout';
-import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 function Header(){
 

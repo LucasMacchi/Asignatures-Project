@@ -1,5 +1,5 @@
 import "./Login.css";
-import React, {useContext, useState, useEffect} from 'react';
+import {useContext, useState, useEffect} from 'react';
 import { GlobalContext, UserContext } from '../../Context/Contexts';
 
 import Backdrop from '@mui/material/Backdrop';
@@ -14,7 +14,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import CloseIcon from '@mui/icons-material/Close';
 import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import Link from "@mui/material/Link";
 
 export default function Login () {
 
