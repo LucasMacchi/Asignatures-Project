@@ -12,7 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import {IUserRegister, emailRegex } from '../../interfaces/interfaces';
 
 import CloseIcon from '@mui/icons-material/Close';
-import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import Checkbox from '@mui/material/Checkbox';
 

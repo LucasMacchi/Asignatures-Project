@@ -1,4 +1,4 @@
-import React, {useReducer} from "react";
+import {useReducer} from "react";
 import { IAsigantureState, IPropsChildren,IAction, IAsignature_add } from "../../interfaces/interfaces";
 import { AsignaturesContext } from "../Contexts";
 import t from "../Types";

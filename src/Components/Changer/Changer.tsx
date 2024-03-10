@@ -1,7 +1,7 @@
 import "./Changer.css"
 
 import { GlobalContext, UserContext } from "../../Context/Contexts";
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import Backdrop from '@mui/material/Backdrop';
 import TextField from '@mui/material/TextField';
 import Paper from "@mui/material/Paper"
