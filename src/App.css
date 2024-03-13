@@ -4,7 +4,7 @@ html, body {
   padding: 0;
 }
 body{
-  background: rgba(115,23,23,1);
+  background: rgb(120, 160, 131);
   height: 100%;
 }
 #addBtn{

@@ -60,13 +60,12 @@ function Header(){
         <AppBar position="static">
             <div id="navBar-Tab">
                 <Box sx={{display: "flex", alignItems: "center"}}>
-                    <EventNoteIcon fontSize="large"/>
-                    <Typography variant="h6">Your Schedule</Typography>
-                </Box>
-                <Tabs value={tabPos} centered textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
-                    <Tab icon={<CalendarMonthIcon/>} iconPosition="start" label={global?.translation.types.week} value={0}/>
-                    <Tab icon={<CheckBoxIcon/>} iconPosition="start" label={global?.translation.types.todo} value={1}/>
+                <EventNoteIcon/>
+                <Tabs value={tabPos} textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
+                    <Tab label={global?.translation.types.week} value={0}/>
+                    <Tab label={global?.translation.types.todo} value={1}/>
                 </Tabs>
+                </Box>
                 <div id="Login-button">
                     <LanguageIcon fontSize="large"/>
                         <FormControl sx={{minWidth: 80}}>

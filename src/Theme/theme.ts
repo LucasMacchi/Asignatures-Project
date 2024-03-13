@@ -4,16 +4,16 @@ import { grey } from "@mui/material/colors";
 const theme = createTheme({
     palette: {
         primary: {
-            main: grey[900]
+            main: "#35374B"
         },
         secondary: {
-            main: grey[50]
+            main: "#EEEEEE"
         },
         background:{
-            paper: grey[900]
+            paper: "#35374B"
         },
         text:{
-            primary: grey[50],
+            primary: "#EEEEEE",
             
         }
     }
