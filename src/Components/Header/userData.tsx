@@ -8,9 +8,13 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { Button } from "@mui/material";
+import { Button, ListItem, ListItemButton } from "@mui/material";
 import { useNavigate } from "react-router";
-
+import MenuItem from "@mui/material/MenuItem";
+import EditIcon from '@mui/icons-material/Edit';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function UserData () {
     
@@ -19,9 +23,11 @@ export default function UserData () {
     const navigate = useNavigate()
 
     const [loading, setLoad] = useState(false)
+    const [alter, alternate] = useState<"pass" | "user">("pass")
     //buttons
 
     const change_password_btn = async () => {
+        alternate("pass")
         setLoad(true)
         setTimeout( async () => {
             if(userCon && userCon.isLogged){
@@ -42,6 +48,7 @@ export default function UserData () {
 
     }
     const change_username_btn = () => {
+        alternate("user")
         setLoad(true)
         setTimeout(() => {
             setLoad(false)
@@ -59,32 +66,42 @@ export default function UserData () {
         document.location.reload()
     }
 
+    const circleRender_user = () => {
+        if(loading && alter === "user"){
+            return(<CircularProgress color="secondary"/>)
+        }
+        else return(<EditIcon fontSize="small"/>)
+    }
+    const circleRender_pass = () => {
+        if(loading && alter === "pass"){
+            return(<CircularProgress color="secondary"/>)
+        }
+        else return(<EditIcon fontSize="small"/>)
+    }
+
     return(
         <Box >
-            <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon color="secondary" />}>
-                    <AccountBoxIcon/>
-                    <Typography variant="subtitle1">{userCon?.user.username}</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Box>
-                        <Typography variant="subtitle1">{global?.translation.user_info.username}</Typography>
-                        <Typography variant="subtitle2">{userCon?.user.username}</Typography>
-                        <Button disabled={loading} variant="contained" color="secondary" size="small" onClick={change_username_btn}>{global?.translation.user_info.change_username}</Button>
-                    </Box>
-                    <Box>
-                        <Typography variant="subtitle1">{global?.translation.user_info.email}</Typography>
-                        <Typography variant="subtitle2">{userCon?.user.email}</Typography>
-                    </Box>
-                    <Box>
-                        <Typography variant="subtitle1">{global?.translation.user_info.password}</Typography>
-                        <Button disabled={loading} variant="contained" color="secondary" size="small" onClick={change_password_btn}>{global?.translation.user_info.change_password}</Button>
-                    </Box>
-                    <Box>
-                        <Button startIcon={<LogoutIcon />} variant="contained" color="secondary" size="small" sx={{marginTop: 2}} onClick={logout_btn}>{global?.translation.user_info.logout}</Button>
-                    </Box>
-                </AccordionDetails>
-            </Accordion>
+            <ListItem sx={{display: "flex", justifyContent: "space-between"}}>
+                <ListItemText>{global?.translation.user_info.username + " "+ userCon?.user.username}</ListItemText>
+                <ListItemButton color="primary" disableGutters onClick={change_username_btn} disabled={loading}>
+                    <ListItemIcon>{circleRender_user()}</ListItemIcon>
+                </ListItemButton>
+            </ListItem>
+            <ListItem>
+                <ListItemText>{global?.translation.user_info.email + " "+ userCon?.user.email}</ListItemText>
+            </ListItem>
+            <ListItem sx={{display: "flex", justifyContent: "space-between"}}>
+                <ListItemText>{global?.translation.user_info.password + " **********"}</ListItemText>
+                <ListItemButton color="primary" disableGutters onClick={change_password_btn} disabled={loading}>
+                    <ListItemIcon>{circleRender_pass()}</ListItemIcon>
+                </ListItemButton>
+            </ListItem>
+            <ListItem >
+                <ListItemButton color="primary" disableGutters onClick={logout_btn}>
+                    <ListItemIcon><LogoutIcon fontSize="small"/></ListItemIcon>
+                    {global?.translation.user_info.logout}
+                </ListItemButton>
+            </ListItem>
         </Box>
     )
 }

@@ -4,34 +4,44 @@ import { GlobalContext, UserContext } from "../../Context/Contexts";
 import UserData from "./userData";
 //Material import
 import { AppBar, Box } from "@mui/material";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Button from "@mui/material/Button";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import LanguageIcon from '@mui/icons-material/Language';
 import Typography from "@mui/material/Typography";
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import MenuList from '@mui/material/MenuList';
+import Switch from '@mui/material/Switch';
 
 function Header(){
 
+    //menu
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+    
     //context
     const global = useContext(GlobalContext)
     const userCon = useContext(UserContext)
-    //states
-    const[tabPos, setTabPos] = useState(0);
-    
-    useEffect(() => {
-        if(tabPos === 0) global?.changeType('week')
-        else global?.changeType('check')
-    },[tabPos])
-
+    //states    
+    const [check, setChecked] = useState(false)
     //functions
-    const changedTab = async (e:any, value: number) => {
-        setTabPos(value)
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setChecked(event.target.checked);
+        if(event.target.checked === true) global?.changeLanguage("spa")
+        else global?.changeLanguage("en")
+    };
+    const changedTab = (value: number) => {
+        if(value === 1) global?.changeType("check")
+        else global?.changeType("week")
     }
     const changeLanguage = (event: SelectChangeEvent) => {
         global?.changeLanguage(event.target.value)
@@ -44,14 +54,20 @@ function Header(){
     const loginDisplay = () => {
         if(userCon?.isLogged){
             return(
-                <Box display={"flex"} alignItems={"center"}>
+                <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+            >
+                <MenuList>
                     <UserData/>
-                </Box>
-            )
-        }
-        else{
-            return(
-                <Button variant="outlined" color="secondary" size="large" onClick={loginBtn}>Login</Button>
+                </MenuList>
+                
+            </Menu>
             )
         }
     }
@@ -61,21 +77,23 @@ function Header(){
             <div id="navBar-Tab">
                 <Box sx={{display: "flex", alignItems: "center"}}>
                 <EventNoteIcon/>
-                <Tabs value={tabPos} textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
-                    <Tab label={global?.translation.types.week} value={0}/>
-                    <Tab label={global?.translation.types.todo} value={1}/>
-                </Tabs>
+                <Button color="secondary" onClick={() => changedTab(0)}>{global?.translation.types.week}</Button>
+                <Button color="secondary" onClick={() => changedTab(1)}>{global?.translation.types.todo}</Button>
+                <Button color="secondary"
+                    id="basic-button"
+                    aria-controls={open ? 'basic-menu' : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open ? 'true' : undefined}
+                    onClick={userCon?.isLogged ? handleClick : loginBtn}>
+                    {userCon?.isLogged ? global?.translation.user_info.user_information : global?.translation.login.log_btn}
+                </Button>
                 </Box>
-                <div id="Login-button">
-                    <LanguageIcon fontSize="large"/>
-                        <FormControl sx={{minWidth: 80}}>
-                            <Select id="language_selector" value={global?.language} onChange={changeLanguage}>
-                                <MenuItem color="secondary" value={'en'}>EN</MenuItem>
-                                <MenuItem value={'spa'}>SPA</MenuItem>
-                            </Select>
-                        </FormControl>
-                    {loginDisplay()}
-                </div>
+                <Box display={"flex"} alignItems={"center"}>
+                    <Typography>ENG</Typography>
+                        <Switch checked={check} onChange={(handleChange)} color="secondary"/>
+                    <Typography>SPA</Typography>
+                </Box>
+                {loginDisplay()}
             </div>
 
         </AppBar>
@@ -83,3 +101,10 @@ function Header(){
 }
 
 export default Header;
+
+/*
+                <Tabs value={tabPos} textColor="secondary" indicatorColor="secondary" onChange={changedTab}>
+                    <Tab label={global?.translation.types.week} value={0}/>
+                    <Tab label={global?.translation.types.todo} value={1}/>
+                </Tabs>
+                */

@@ -62,7 +62,6 @@ export default function AddTask () {
     const createTask = async () => {
         if(!btn && user_state?.isLogged){
             task.id = user_state.user.user_id
-            task.day = daySelected ? daySelected : currentDay
             const response = await asignatureCont?.taskAdd(task)
             if(response){
                 global?.changeAlert({status: true, text: global?.translation.alerts.new_task, type: "success"})
@@ -96,7 +95,7 @@ export default function AddTask () {
     return(
         <Backdrop open={global ? global.addTaskDialog : false}>
             <Paper>
-                <Box component="form" width={600} padding={4}>
+                <Box component="form" width={700} padding={4}>
                     <Box sx={{display: "flex", justifyContent: "flex-end"}}>
                         <IconButton onClick={handleClose}>
                             <CloseIcon color='secondary'/>
@@ -122,6 +121,18 @@ export default function AddTask () {
                                         {option}
                                     </MenuItem>
                                 ))}
+                            </TextField>
+                        </Box>
+                        <Box marginLeft={5} display={global?.type === "check" ? "none" : "block"}>
+                            <Typography variant="h5" color="secondary">{global?.translation.task.day}</Typography>
+                            <TextField id='day' select value={task.day} onChange={(e) => onChange("day",e.target.value)}>
+                                <MenuItem key={1} value={1}>{global?.translation.days[1]}</MenuItem>
+                                <MenuItem key={2} value={2}>{global?.translation.days[2]}</MenuItem>
+                                <MenuItem key={3} value={3}>{global?.translation.days[3]}</MenuItem>
+                                <MenuItem key={4} value={4}>{global?.translation.days[4]}</MenuItem>
+                                <MenuItem key={5} value={5}>{global?.translation.days[5]}</MenuItem>
+                                <MenuItem key={6} value={6}>{global?.translation.days[6]}</MenuItem>
+                                <MenuItem key={0} value={0}>{global?.translation.days[0]}</MenuItem>
                             </TextField>
                         </Box>
                     </Box>

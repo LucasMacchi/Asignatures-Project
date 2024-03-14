@@ -145,7 +145,8 @@ export interface Ilanguages {
         title: string,
         description: string,
         time: string,
-        create_task: string
+        create_task: string,
+        day: string
     },
     changer: {
         password_btn: string,

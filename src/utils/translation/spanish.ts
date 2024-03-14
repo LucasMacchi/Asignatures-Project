@@ -40,7 +40,7 @@ export const spanish: Ilanguages = {
         register_btn: "REGISTRARSE"
     },
     user_info: {
-        user_information: "Informacion del Usuario",
+        user_information: "Usuario",
         email: "Email:",
         password: "Contraseña:",
         username: "Nombre de Usuario:",
@@ -52,7 +52,7 @@ export const spanish: Ilanguages = {
         new_task: "NUEVA TAREA A SIDO CREADA",
         error_new_task: "ERROR AL CREAR NUEVA TAREA",
         error_user_register: "ERROR AL CREAR USUARIO, INTENTA OTRO CORREO",
-        new_user_register: "NUEVO USUARIO RESGISTRADO",
+        new_user_register: "NUEVO USUARIO RESGISTRADO, CHEQUEA TU CORREO",
         login_success: "INGRESO EXITOSAMENTE",
         login_error: "ERROR AL INGRESAR, VERIFIQUE LOS DATOS",
         mail_password_reset: "Chequea tu correo para cambiar tu contraseña",
@@ -66,7 +66,8 @@ export const spanish: Ilanguages = {
         title: "Titulo",
         description: "Descripcion",
         time: "Horario",
-        create_task: "Crear Tarea"
+        create_task: "Crear Tarea",
+        day: "Dia de la Semana"
     },
     changer: {
         password_btn: "Cambiar Contraseña",

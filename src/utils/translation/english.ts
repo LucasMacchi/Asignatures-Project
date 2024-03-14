@@ -40,7 +40,7 @@ export const english: Ilanguages = {
         register_btn: "SIGN UP"
     },
     user_info: {
-        user_information: "User Information",
+        user_information: "User",
         email: "Email:",
         password: "Password:",
         username: "Username:",
@@ -53,7 +53,7 @@ export const english: Ilanguages = {
         new_task: "NEW TASK CREATED",
         error_new_task: "ERROR TO CREATE NEW TASK",
         error_user_register: "ERROR TO CREATE NEW USER, TRY OTHER EMAIL",
-        new_user_register: "NEW USER CREATED",
+        new_user_register: "NEW USER CREATED, CHECK YOUR EMAIL",
         login_success: "LOGGED SUCCESSFULLY",
         login_error: "ERROR TO LOGIN, CHECK CREDENTIALS",
         mail_password_reset: "Check your email to continue changing your password",
@@ -66,7 +66,8 @@ export const english: Ilanguages = {
         title: "Title",
         description: "Description",
         time: "Time",
-        create_task: "Create Task"
+        create_task: "Create Task",
+        day: "Day of the Week"
     },
     changer: {
         password_btn: "Change Password",
